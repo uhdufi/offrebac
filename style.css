@@ -35,3 +35,158 @@
     letter-spacing:-1.5px!important;
   }
 }
+
+
+/* Smooth, seamless moving subject ticker */
+.ticker{overflow:hidden}
+.ticker-track{
+  display:flex;
+  width:max-content;
+  min-width:0;
+  justify-content:flex-start;
+  gap:0;
+  animation:ticker-marquee 30s linear infinite;
+  will-change:transform;
+}
+.ticker-group{
+  display:flex;
+  align-items:center;
+  justify-content:space-around;
+  gap:36px;
+  flex-shrink:0;
+  padding-inline:24px;
+  direction:ltr;
+}
+.ticker-track span{white-space:nowrap}
+.ticker-track i{flex-shrink:0}
+.ticker:hover .ticker-track{animation-play-state:paused}
+@keyframes ticker-marquee{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
+@media(max-width:720px){
+  .ticker-group{gap:25px;padding-inline:16px}
+  .ticker-track{animation-duration:23s}
+}
+@media(prefers-reduced-motion:reduce){
+  .ticker-track{animation:none}
+}
+
+
+/* Light pastel theme inspired by the supplied reference */
+:root{
+ --bg:#faf8f2;--panel:#ffffff;--panel2:#f4f1eb;--text:#20232d;
+ --muted:#687b91;--line:rgba(46,59,79,.13);--mint:#a9efd3;
+ --yellow:#efbd70;--purple:#a98acb;--radius:18px;
+}
+body{background:var(--bg);color:var(--text)}
+.topbar{border-bottom-color:#e9e5dc}
+.nav{color:#66768b}
+.nav-cta{border-color:#d6dce5;color:#242936!important}
+.hero-lead{color:#66768b}
+.hero-footnote{color:#708198}
+.hero-art .orbit{border-color:rgba(91,116,143,.14)}
+.offer-card{background:linear-gradient(145deg,#fff,#f2f0eb);border-color:#e1ded6;box-shadow:0 30px 90px rgba(38,46,61,.10)}
+.card-top,.card-bottom{color:#77869b}
+.card-status{border-color:#d5dce4;color:#56856f}
+.card-line{background:#e3e0d8}
+.float-chip{background:#fff;border-color:#e1ded6;box-shadow:0 15px 45px rgba(38,46,61,.09);color:#2a3040}
+.float-chip span{color:#73849b}
+.orbit-math{background:#fff5e5;color:#b98b3e;border-color:#ead8b8}
+.orbit-physics{background:#f2edf9;color:#9072bb;border-color:#ddd2ed}
+.orbit-book{background:#eff5e9;color:#6c8d70;border-color:#d9e5d2}
+.ticker{background:#f1eee7;border-block-color:#e4dfd5}
+.ticker-track{color:#6f8198}
+.subject-card{background:#eef2fc;border-color:#dce1ed;color:#20232d}
+.subject-math{background:#eef2fc;border-color:#dce1ed}
+.subject-physics{background:#efedf9;border-color:#e0dcef}
+.subject-svt{background:#eff2e9;border-color:#dfe5d8}
+.subject-english{background:#f5eee2;border-color:#e9dfcf}
+.subject-philo{background:#f3eaf0;border-color:#e6dce4}
+.subject-number{color:#8a7b91}
+.subject-icon{height:142px;display:flex;align-items:center;justify-content:center;position:relative}
+.subject-icon svg{width:100%;height:125px;max-width:190px;overflow:visible}
+.icon-math{color:#617be9}.icon-physics{color:#8d6dbc}.icon-svt{color:#6d8c70}.icon-english{color:#b78b43}.icon-philo{color:#aa7fa2}
+.subject-card h3{color:#20232d;font-size:17px}
+.included{display:block;border-top:1px solid rgba(60,70,90,.08);padding-top:15px;color:#647a92}
+.muted-note{color:#7c8a9d}
+.steps-section,.lab-section{background:#f2f0e9;border-color:#e3dfd6}
+.step,.lab-demo{background:#fff;border-color:#e3dfd6;box-shadow:0 15px 45px rgba(36,44,60,.04)}
+.step p,.section-heading>p,.register-intro>p{color:#6e7e92}
+.step-icon{background:#e7f5ed;color:#56856f}
+.register-form{background:#fff;border-color:#e2ded5;box-shadow:0 25px 75px rgba(35,44,60,.06)}
+.register-form>input{background:#faf9f5;border-color:#dddcd6;color:#20232d}
+.register-form input::placeholder{color:#a1a8b3}
+.track-option{background:#faf9f5;border-color:#e0ded7}
+.track-option:has(input:checked){background:#eef8f1;border-color:#9dd9bf}
+.track-option small{color:#7e8a9b}
+.form-summary{border-color:#e8e4dc}
+.form-summary small,.form-privacy,.field-hint{color:#7b899a}
+.price-stamp{background:#fff;border-color:#e2ded5}
+.lab-demo{background:#fff}
+.demo-head{color:#718198}
+.demo-tag{border-color:#e1ded6}
+.graph-area{background:#f6f7fa}
+.math-stats>div{background:#f8f7f2;border-color:#e9e5dc}
+.math-stats small,.demo-explain{color:#78869a}
+.faq-list{border-color:#e5e1d9}
+.faq-list details{border-color:#e5e1d9}
+.faq-list details p{color:#6f7e91}
+.final-cta{background:#e8f5ed;border-color:#d5e9dc}
+.footer-main,.footer-bottom{border-color:#e5e1d9}
+.footer-main>p,.footer-legal{color:#748196}
+.footer-legal strong{color:#3c4859}
+.clear-btn{border-color:#d7dce3;color:#6f7d90}
+.footer-bottom{color:#7d899a}
+@media(max-width:720px){
+ .nav{background:#fff;border-color:#e5e1d9}
+ .subject-icon{height:112px}
+ .subject-icon svg{height:105px}
+}
+
+
+/* Light galaxy-style price presentation inspired by the reference */
+:root{--bg:#faf8f2;--panel:#fff;--panel2:#f4f1eb;--text:#20232d;--muted:#687b91;--line:rgba(46,59,79,.13);--mint:#a9efd3;--yellow:#f2b85f;--purple:#9b83d1}
+body{background:var(--bg);color:var(--text)}
+.galaxy-card{isolation:isolate;overflow:visible;background:linear-gradient(145deg,#fff 0%,#f5f3ee 100%);border:1px solid #e2ded5;box-shadow:0 28px 75px rgba(36,44,60,.13);text-align:center;color:#20232d}
+.galaxy-card:before,.galaxy-card:after{content:"";position:absolute;z-index:-1;left:50%;top:54%;width:125%;height:48%;border:1.5px solid rgba(73,103,166,.82);border-radius:50%;pointer-events:none}
+.galaxy-card:before{transform:translate(-50%,-50%) rotate(28deg)}
+.galaxy-card:after{transform:translate(-50%,-50%) rotate(-28deg)}
+.galaxy-ring{position:absolute;z-index:-1;left:50%;top:54%;width:78%;height:66%;border:1px dashed rgba(73,103,166,.7);border-radius:50%;transform:translate(-50%,-50%);pointer-events:none}
+.galaxy-ring-two{width:92%;height:82%;border-style:solid;border-color:rgba(73,103,166,.15)}
+.galaxy-star{position:absolute;width:12px;height:12px;border-radius:50%;z-index:0;pointer-events:none}
+.galaxy-star-one{left:-6px;top:44%;background:#4c67ff;box-shadow:0 0 0 5px rgba(76,103,255,.08)}
+.galaxy-star-two{right:3px;top:73%;background:#f36a4b;box-shadow:0 0 0 5px rgba(243,106,75,.08)}
+.galaxy-card .card-top,.galaxy-card .card-bottom{position:relative;z-index:2;color:#687b91;letter-spacing:.6px}
+.galaxy-card .card-status{color:#536d9d;border-color:#d5ddeb;background:rgba(255,255,255,.7)}
+.galaxy-card .card-symbol{position:relative;z-index:2;color:#6e85ee;margin-top:26px;font-size:42px;line-height:1}
+.galaxy-card .card-title{position:relative;z-index:2;color:#20232d;font-size:22px;margin-top:18px}
+.galaxy-card .card-price{position:relative;z-index:2;text-align:center;color:#20232d;font-size:clamp(62px,6vw,86px);line-height:1.08;letter-spacing:-3px;margin:13px 0 8px}
+.galaxy-card .card-price span{color:#f07860;font-size:25px;letter-spacing:-.5px}
+.galaxy-card .card-line{position:relative;z-index:2;background:#e0ded8;margin:19px 0 13px}
+.galaxy-card .card-bottom{font-size:13px}
+.galaxy-card .arrow-circle{background:#4c67ff;color:#fff}
+/* Keep important text and controls readable on the light palette */
+.hero h1,.section-heading h2,.register-intro h2,.lab-copy h2,.final-cta h2,.subject-card h3{color:#20232d}
+.hero h1 span,.section-heading h2 span,.register-intro h2 span,.lab-copy h2 span,.final-cta h2 span{color:#4e947c}
+.hero-lead,.section-heading>p,.register-intro>p,.step p,.faq-list details p,.footer-main>p{color:#61738a}
+.eyebrow,.section-kicker{color:#4c8d77}
+.btn-primary{background:#4c67ff;color:#fff}.btn-primary:hover{background:#3c55e7}
+.btn-ghost{color:#35445a;border-color:#cbd3df;background:rgba(255,255,255,.55)}
+.nav{color:#52657d}.nav-cta{color:#34445c!important;border-color:#d1d8e2}
+.hero-footnote,.muted-note,.included{color:#657991}
+.ticker{background:#f1eee7;border-color:#e4dfd5}.ticker-track{color:#657991}
+.steps-section,.lab-section{background:#f2f0e9;border-color:#e3dfd6}
+.step,.lab-demo,.register-form{background:#fff;border-color:#e2ded5;color:#20232d}
+.step p,.demo-head,.demo-explain{color:#687b91}
+.lab-tab{color:#596d85;border-color:#d3dbe4}.lab-tab.active,.lab-tab:hover{background:#4c67ff;border-color:#4c67ff;color:#fff}
+.register-form>input{background:#faf9f5;border-color:#d8dce3;color:#20232d}
+.register-form input::placeholder{color:#8996a8}
+.track-option{background:#faf9f5;border-color:#dfe2e7}.track-option small,.form-privacy,.field-hint{color:#6c7e94}
+.track-option:has(input:checked){background:#edf7f1;border-color:#9bd4bb}
+.form-summary small{color:#687b91}.form-summary>b{color:#b17c2e}
+.price-stamp{background:#fff;border-color:#e2ded5}.price-stamp span{color:#687b91}.price-stamp strong{color:#b17c2e}
+.faq-list,.faq-list details,.footer-main,.footer-bottom{border-color:#e2ded5}.faq-list summary{color:#20232d}.faq-list summary span{color:#4c8d77}
+.final-cta{background:#e8f5ed;border-color:#d5e9dc}.footer-legal{color:#687b91}.footer-legal strong{color:#35445a}
+.clear-btn{color:#596d85;border-color:#cbd3df}
+@media(max-width:720px){.galaxy-card:before,.galaxy-card:after{width:118%;height:42%}.galaxy-card .card-price{font-size:65px}.galaxy-card .card-title{font-size:20px}.nav{background:#fff;border-color:#e2ded5}.menu-toggle{color:#34445c;border-color:#d2d9e3}}
