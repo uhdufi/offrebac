@@ -190,3 +190,14 @@ body{background:var(--bg);color:var(--text)}
 .final-cta{background:#e8f5ed;border-color:#d5e9dc}.footer-legal{color:#687b91}.footer-legal strong{color:#35445a}
 .clear-btn{color:#596d85;border-color:#cbd3df}
 @media(max-width:720px){.galaxy-card:before,.galaxy-card:after{width:118%;height:42%}.galaxy-card .card-price{font-size:65px}.galaxy-card .card-title{font-size:20px}.nav{background:#fff;border-color:#e2ded5}.menu-toggle{color:#34445c;border-color:#d2d9e3}}
+
+
+/* Consistent professional inline SVG icon system */
+.nav-cta span svg,.btn span svg,.arrow-circle svg,.check svg,.mini-spark svg,.ticker-group i svg,.step-icon svg,.menu-toggle svg,.subject-orbit svg{width:1.15em;height:1.15em;display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.nav-cta span,.btn span,.arrow-circle,.check,.mini-spark,.ticker-group i{display:inline-flex;align-items:center;justify-content:center;vertical-align:middle}
+.step-icon{display:flex;align-items:center;justify-content:center}
+.step-icon svg{width:27px;height:27px;stroke-width:1.7}
+.menu-toggle svg{width:24px;height:24px;stroke-width:1.8}
+.ticker-group i svg,.mini-spark svg{width:19px;height:19px;stroke-width:1.7}
+.check svg{width:16px;height:16px;stroke-width:2.2}
+.subject-orbit svg{width:48px;height:48px;stroke-width:1.6}
