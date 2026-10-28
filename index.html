@@ -1,160 +1,2671 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0b1020">
-  <meta name="description" content="Offre Bac — خمس مواد لعام دراسي كامل لتلاميذ الثانية باك PC وSVT، خيار فرنسية.">
-  <title>Offre Bac — عام الباك ديالك، عرض واحد</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Tajawal:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#faf8f2">
+  <meta name="description" content="Offre Bac - استعد للباكالوريا مع دروس تفاعلية ومواكبة من الأساتذة.">
+  <title>Offre Bac | طريقك نحو النجاح</title>
+
+  <style>
+    /* =========================================
+       1. GLOBAL VARIABLES AND RESET
+    ========================================= */
+
+    :root {
+      --bg: #faf8f2;
+      --surface: #ffffff;
+      --surface-soft: #f3f0e8;
+      --text: #20232d;
+      --muted: #708097;
+      --line: #e6e1d7;
+      --mint: #a9efd3;
+      --mint-dark: #4f8b76;
+      --blue: #4c67ff;
+      --blue-soft: #eef2fc;
+      --purple: #9475bf;
+      --purple-soft: #f0ebf8;
+      --gold: #eab766;
+      --gold-soft: #f7efdf;
+      --green: #718f72;
+      --green-soft: #edf3e8;
+      --pink: #aa7fa2;
+      --pink-soft: #f3eaf0;
+      --radius: 20px;
+      --shadow: 0 20px 60px rgba(38, 43, 57, .07);
+      --container: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Tahoma, Arial, sans-serif;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    body,
+    button,
+    input,
+    textarea,
+    select {
+      font-family: Tahoma, Arial, sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    img,
+    svg {
+      max-width: 100%;
+    }
+
+    img {
+      display: block;
+    }
+
+    .container {
+      width: min(var(--container), calc(100% - 48px));
+      margin-inline: auto;
+    }
+
+    .section {
+      padding-block: 90px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 36px;
+    }
+
+    .eyebrow {
+      color: var(--mint-dark);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      overflow-wrap: anywhere;
+    }
+
+    h1 {
+      font-size: clamp(38px, 6vw, 72px);
+      line-height: 1.25;
+      letter-spacing: -1.8px;
+    }
+
+    h2 {
+      font-size: clamp(27px, 4vw, 42px);
+      line-height: 1.45;
+      letter-spacing: -.8px;
+    }
+
+    h3 {
+      font-size: 19px;
+      line-height: 1.6;
+    }
+
+    .section-description {
+      max-width: 530px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .accent {
+      color: var(--mint-dark);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .icon {
+      width: 23px;
+      height: 23px;
+      flex: 0 0 auto;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .btn {
+      min-height: 52px;
+      padding: 13px 22px;
+      border-radius: 13px;
+      border: 1px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      transition:
+        transform .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: #fff;
+      box-shadow: 0 10px 24px rgba(76, 103, 255, .18);
+    }
+
+    .btn-primary:hover {
+      background: #3c55e7;
+    }
+
+    .btn-secondary {
+      background: var(--surface);
+      border-color: var(--line);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: var(--surface-soft);
+    }
+
+    .btn-mint {
+      background: var(--mint);
+      color: #173e35;
+    }
+
+    .btn-block {
+      width: 100%;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: var(--radius);
+    }
+
+    /* =========================================
+       2. HEADER AND PROFESSIONAL BRAND
+    ========================================= */
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250, 248, 242, .93);
+      border-bottom: 1px solid rgba(230, 225, 215, .8);
+      backdrop-filter: blur(16px);
+    }
+
+    .header-inner {
+      min-height: 84px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .brand-mark {
+      width: 47px;
+      height: 47px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      background: var(--mint);
+      color: #173e35;
+    }
+
+    .brand-mark svg {
+      width: 27px;
+      height: 27px;
+    }
+
+    .brand-name {
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      line-height: 1.3;
+      direction: ltr;
+      text-align: right;
+    }
+
+    .brand-subtitle {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 26px;
+    }
+
+    .nav a {
+      color: #59677b;
+      font-size: 13px;
+      transition: color .2s ease;
+    }
+
+    .nav a:hover {
+      color: var(--mint-dark);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .menu-toggle {
+      width: 44px;
+      height: 44px;
+      display: none;
+      place-items: center;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--text);
+      border-radius: 12px;
+    }
+
+    /* =========================================
+       3. HERO SECTION
+    ========================================= */
+
+    .hero {
+      padding-block: 72px 82px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr .95fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 13px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .7);
+      border-radius: 100px;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 22px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--mint-dark);
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px rgba(169, 239, 211, .45);
+    }
+
+    .hero h1 {
+      margin-bottom: 22px;
+    }
+
+    .hero-description {
+      max-width: 540px;
+      margin-bottom: 28px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-meta {
+      margin-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .hero-meta .icon {
+      width: 17px;
+      height: 17px;
+      color: var(--mint-dark);
+    }
+
+    /* Galaxy price visual */
+
+    .galaxy-card {
+      min-height: 470px;
+      position: relative;
+      isolation: isolate;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(221, 216, 205, .9);
+      border-radius: 28px;
+      background:
+        radial-gradient(
+          circle at 50% 50%,
+          rgba(255, 255, 255, .98) 0%,
+          rgba(255, 255, 255, .78) 42%,
+          rgba(244, 241, 233, .85) 100%
+        );
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .galaxy-grid {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      opacity: .45;
+      background-image:
+        linear-gradient(rgba(116, 132, 156, .09) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(116, 132, 156, .09) 1px, transparent 1px);
+      background-size: 35px 35px;
+    }
+
+    .orbit {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 83%;
+      height: 47%;
+      border: 1.5px solid #8798bd;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .orbit-one {
+      transform: translate(-50%, -50%) rotate(30deg);
+      animation: orbit-one 24s linear infinite;
+    }
+
+    .orbit-two {
+      transform: translate(-50%, -50%) rotate(-30deg);
+      animation: orbit-two 29s linear infinite;
+    }
+
+    .orbit-three {
+      width: 54%;
+      height: 68%;
+      border-style: dashed;
+      border-color: #aab5cf;
+      transform: translate(-50%, -50%) rotate(0deg);
+      animation: orbit-three 36s linear infinite;
+    }
+
+    .orbit-dot {
+      position: absolute;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+    }
+
+    .orbit-dot.blue {
+      background: var(--blue);
+      top: 32%;
+      left: 15%;
+    }
+
+    .orbit-dot.coral {
+      background: #e98669;
+      bottom: 29%;
+      right: 13%;
+    }
+
+    .orbit-dot.mint {
+      background: var(--mint-dark);
+      top: 17%;
+      right: 24%;
+      width: 8px;
+      height: 8px;
+    }
+
+    .galaxy-top {
+      position: absolute;
+      top: 24px;
+      right: 25px;
+      left: 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 11px;
+      direction: ltr;
+    }
+
+    .galaxy-tag {
+      padding: 7px 11px;
+      border: 1px solid #d8deeb;
+      background: rgba(255, 255, 255, .7);
+      border-radius: 100px;
+    }
+
+    .galaxy-center {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      padding: 24px;
+    }
+
+    .galaxy-math {
+      color: var(--mint-dark);
+      font-family: Georgia, serif;
+      font-size: 70px;
+      line-height: 1.2;
+      direction: ltr;
+    }
+
+    .galaxy-math span {
+      font-size: 32px;
+    }
+
+    .galaxy-title {
+      font-size: clamp(18px, 2vw, 25px);
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .price-line {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 10px;
+      direction: ltr;
+    }
+
+    .price-number {
+      color: var(--gold);
+      font-size: clamp(65px, 8vw, 94px);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -5px;
+    }
+
+    .price-currency {
+      color: #e58d69;
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .galaxy-caption {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 10px;
+    }
+
+    .galaxy-footer {
+      position: absolute;
+      right: 24px;
+      bottom: 22px;
+      left: 24px;
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .galaxy-footer strong {
+      color: var(--text);
+    }
+
+    @keyframes orbit-one {
+      from { transform: translate(-50%, -50%) rotate(30deg); }
+      to { transform: translate(-50%, -50%) rotate(390deg); }
+    }
+
+    @keyframes orbit-two {
+      from { transform: translate(-50%, -50%) rotate(-30deg); }
+      to { transform: translate(-50%, -50%) rotate(330deg); }
+    }
+
+    @keyframes orbit-three {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    /* =========================================
+       4. SUBJECTS
+    ========================================= */
+
+    .subjects-section {
+      background: #f3f0e8;
+    }
+
+    .subjects-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .subject-card {
+      min-width: 0;
+      min-height: 220px;
+      padding: 20px 17px;
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .subject-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    .subject-card.math {
+      background: var(--blue-soft);
+      color: #617be9;
+    }
+
+    .subject-card.physics {
+      background: var(--purple-soft);
+      color: var(--purple);
+    }
+
+    .subject-card.science {
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .subject-card.english {
+      background: var(--gold-soft);
+      color: #b58a42;
+    }
+
+    .subject-card.philosophy {
+      background: var(--pink-soft);
+      color: var(--pink);
+    }
+
+    .subject-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+      letter-spacing: 1px;
+      gap: 8px;
+    }
+
+    .subject-symbol {
+      height: 105px;
+      display: grid;
+      place-items: center;
+      margin-block: 8px;
+    }
+
+    .subject-symbol svg {
+      width: 94px;
+      height: 94px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .subject-card h3 {
+      color: var(--text);
+      font-size: 15px;
+      margin-top: auto;
+    }
+
+    .subject-card p {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 6px;
+    }
+
+    /* =========================================
+       5. WEEKLY SCHEDULE
+    ========================================= */
+
+    .schedule-section {
+      background: var(--bg);
+    }
+
+    .schedule-summary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .summary-chip {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      padding: 9px 13px;
+      border-radius: 100px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .schedule-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .day-card {
+      min-width: 0;
+      padding: 15px 11px;
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      background: var(--surface);
+      min-height: 190px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      transition: box-shadow .2s ease, transform .2s ease;
+    }
+
+    .day-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+
+    .day-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 5px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 11px;
+    }
+
+    .day-heading h3 {
+      font-size: 14px;
+    }
+
+    .day-count {
+      color: var(--muted);
+      font-size: 10px;
+      white-space: nowrap;
+    }
+
+    .day-subjects {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .schedule-chip {
+      display: block;
+      padding: 9px 6px;
+      text-align: center;
+      border-radius: 10px;
+      font-size: 11px;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    .schedule-chip.math {
+      background: var(--blue-soft);
+      color: #4c63bd;
+    }
+
+    .schedule-chip.physics {
+      background: var(--purple-soft);
+      color: #7956a8;
+    }
+
+    .schedule-chip.science {
+      background: var(--green-soft);
+      color: #547c58;
+    }
+
+    .schedule-chip.english {
+      background: var(--gold-soft);
+      color: #9b7336;
+    }
+
+    .schedule-chip.philosophy {
+      background: var(--pink-soft);
+      color: #96688b;
+    }
+
+    .schedule-note {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 20px;
+    }
+
+    /* =========================================
+       6. TEACHER VIDEO / LESSON CARDS
+    ========================================= */
+
+    .teachers-section {
+      background: #f3f0e8;
+    }
+
+    .teacher-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .teacher-card {
+      min-width: 0;
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .teacher-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    .teacher-photo {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: #eae8e1;
+    }
+
+    .teacher-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform .4s ease;
+    }
+
+    .teacher-card:hover .teacher-photo img {
+      transform: scale(1.035);
+    }
+
+    .photo-fallback {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--muted);
+      background:
+        radial-gradient(circle at 50% 40%, #fff 0, #f0eee7 70%);
+      text-align: center;
+      padding: 20px;
+      font-size: 13px;
+    }
+
+    .photo-fallback svg {
+      width: 65px;
+      height: 65px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.5;
+    }
+
+    .photo-label {
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      background: rgba(255, 255, 255, .94);
+      border: 1px solid rgba(230, 225, 215, .9);
+      border-radius: 100px;
+      padding: 6px 10px;
+      font-size: 10px;
+      direction: ltr;
+      letter-spacing: .5px;
+      color: var(--text);
+    }
+
+    .teacher-info {
+      padding: 21px;
+    }
+
+    .teacher-info p {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .teacher-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 18px;
+    }
+
+    .teacher-actions .btn {
+      min-height: 43px;
+      padding: 10px 13px;
+      font-size: 12px;
+      flex: 1 1 120px;
+    }
+
+    /* =========================================
+       7. INTERACTIVE QUESTION PANEL
+    ========================================= */
+
+    .question-section {
+      background: var(--bg);
+    }
+
+    .question-panel {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 35px;
+      align-items: start;
+      padding: clamp(22px, 4vw, 42px);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .question-intro {
+      padding: 8px 0;
+    }
+
+    .question-icon {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      background: var(--mint);
+      color: #285d4e;
+      border-radius: 17px;
+      margin-bottom: 20px;
+    }
+
+    .question-icon svg {
+      width: 27px;
+      height: 27px;
+    }
+
+    .question-intro p {
+      margin-top: 13px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .question-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .field label {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .field input,
+    .field textarea,
+    .field select {
+      width: 100%;
+      min-width: 0;
+      border: 1px solid #dedbd3;
+      background: #fcfbf8;
+      color: var(--text);
+      border-radius: 12px;
+      padding: 13px 14px;
+      outline: none;
+      font-size: 14px;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus {
+      border-color: var(--mint-dark);
+      box-shadow: 0 0 0 3px rgba(169, 239, 211, .3);
+    }
+
+    .field textarea {
+      resize: vertical;
+      min-height: 125px;
+    }
+
+    .form-help {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .form-feedback {
+      color: var(--mint-dark);
+      font-size: 12px;
+      min-height: 20px;
+    }
+
+    /* =========================================
+       8. HOW IT WORKS
+    ========================================= */
+
+    .steps-section {
+      background: #f3f0e8;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .step-card {
+      padding: 25px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: 18px;
+    }
+
+    .step-number {
+      color: var(--mint-dark);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .step-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      background: var(--green-soft);
+      color: var(--green);
+      margin-block: 18px;
+    }
+
+    .step-card p {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* =========================================
+       9. FAQ
+    ========================================= */
+
+    .faq-list {
+      max-width: 850px;
+      margin-inline: auto;
+      border-top: 1px solid var(--line);
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      width: 100%;
+      border: 0;
+      background: transparent;
+      padding: 20px 0;
+      text-align: right;
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .faq-plus {
+      flex: 0 0 auto;
+      width: 30px;
+      height: 30px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      transition: transform .2s ease;
+    }
+
+    .faq-answer {
+      color: var(--muted);
+      font-size: 13px;
+      padding: 0 0 20px;
+      max-width: 700px;
+    }
+
+    .faq-answer[hidden] {
+      display: none;
+    }
+
+    .faq-item.open .faq-plus {
+      transform: rotate(45deg);
+    }
+
+    /* =========================================
+       10. FINAL CTA AND FOOTER
+    ========================================= */
+
+    .final-cta {
+      padding-block: 40px;
+      background: var(--mint);
+    }
+
+    .final-cta-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .final-cta h2 {
+      font-size: clamp(25px, 3.5vw, 37px);
+    }
+
+    .final-cta p {
+      color: #41685b;
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    .final-cta .btn {
+      background: #203e35;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .footer {
+      background: #f5f2eb;
+      padding-top: 45px;
+    }
+
+    .footer-main {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 30px;
+      padding-bottom: 35px;
+    }
+
+    .footer-description {
+      max-width: 370px;
+      margin-top: 13px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer-links a:hover {
+      color: var(--mint-dark);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--line);
+      padding-block: 17px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    /* =========================================
+       11. RESPONSIVE DESIGN
+    ========================================= */
+
+    @media (max-width: 1100px) {
+      .hero-grid {
+        gap: 35px;
+      }
+
+      .subjects-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .schedule-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .day-card {
+        min-height: 160px;
+      }
+
+      .nav {
+        gap: 16px;
+      }
+    }
+
+    @media (max-width: 780px) {
+      .container {
+        width: min(100% - 32px, var(--container));
+      }
+
+      .section {
+        padding-block: 62px;
+      }
+
+      .header-inner {
+        min-height: 72px;
+      }
+
+      .brand-mark {
+        width: 42px;
+        height: 42px;
+      }
+
+      .brand-name {
+        font-size: 15px;
+      }
+
+      .menu-toggle {
+        display: grid;
+      }
+
+      .header-actions > .btn {
+        display: none;
+      }
+
+      .nav {
+        position: absolute;
+        top: calc(100% + 1px);
+        right: 16px;
+        left: 16px;
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--surface);
+        box-shadow: var(--shadow);
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+      }
+
+      .nav.open {
+        display: flex;
+      }
+
+      .nav a {
+        padding: 12px 10px;
+        border-bottom: 1px solid #f0ede6;
+      }
+
+      .nav a:last-child {
+        border-bottom: 0;
+      }
+
+      .hero {
+        padding-block: 45px 55px;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .hero-content {
+        text-align: center;
+      }
+
+      .hero-description {
+        margin-inline: auto;
+      }
+
+      .hero-actions,
+      .hero-meta {
+        justify-content: center;
+      }
+
+      .galaxy-card {
+        min-height: 420px;
+      }
+
+      .section-heading {
+        align-items: start;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .teacher-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .question-panel {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .final-cta-inner {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .footer-main {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 520px) {
+      h1 {
+        font-size: clamp(34px, 10vw, 48px);
+        letter-spacing: -1px;
+      }
+
+      h2 {
+        font-size: 28px;
+      }
+
+      .hero-description {
+        font-size: 15px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .hero-meta {
+        gap: 10px 14px;
+      }
+
+      .galaxy-card {
+        min-height: 360px;
+        border-radius: 22px;
+      }
+
+      .galaxy-top {
+        top: 16px;
+        right: 15px;
+        left: 15px;
+        font-size: 9px;
+      }
+
+      .orbit {
+        width: 90%;
+        height: 44%;
+      }
+
+      .orbit-three {
+        width: 55%;
+        height: 65%;
+      }
+
+      .galaxy-math {
+        font-size: 52px;
+      }
+
+      .galaxy-math span {
+        font-size: 25px;
+      }
+
+      .galaxy-title {
+        font-size: 18px;
+      }
+
+      .price-number {
+        font-size: 68px;
+        letter-spacing: -4px;
+      }
+
+      .price-currency {
+        font-size: 20px;
+      }
+
+      .galaxy-footer {
+        right: 15px;
+        bottom: 14px;
+        left: 15px;
+        font-size: 10px;
+      }
+
+      .subjects-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .subject-card {
+        min-height: 190px;
+        padding: 15px 12px;
+      }
+
+      .subject-symbol {
+        height: 85px;
+      }
+
+      .subject-symbol svg {
+        width: 76px;
+        height: 76px;
+      }
+
+      .subject-card h3 {
+        font-size: 13px;
+      }
+
+      .schedule-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .day-card {
+        min-height: 145px;
+        padding: 13px 10px;
+      }
+
+      .day-heading h3 {
+        font-size: 13px;
+      }
+
+      .schedule-chip {
+        font-size: 11px;
+        padding: 8px 5px;
+      }
+
+      .teacher-grid {
+        grid-template-columns: 1fr;
+        gap: 17px;
+      }
+
+      .teacher-photo {
+        aspect-ratio: 16 / 10;
+      }
+
+      .teacher-info {
+        padding: 18px;
+      }
+
+      .question-panel {
+        padding: 20px 16px;
+      }
+
+      .question-form .btn {
+        width: 100%;
+      }
+
+      .footer-links {
+        gap: 14px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <div class="site-shell">
-    <header class="topbar">
-      <a class="brand" href="#home" aria-label="Offre Bac الصفحة الرئيسية">
-        <span class="brand-mark">OB</span>
-        <span><strong>OFFRE BAC</strong><small>فهم، جرّب، تطوّر</small></span>
+
+  <!-- =========================================
+       HEADER
+  ========================================= -->
+
+  <header class="header">
+    <div class="container header-inner">
+
+      <a class="brand" href="#home" aria-label="Offre Bac - الرئيسية">
+        <span class="brand-mark">
+          <svg viewBox="0 0 32 32" class="icon" aria-hidden="true">
+            <path d="M8 22V10h4l8 9V10h4v12h-4l-8-9v9z"
+              fill="currentColor" stroke="none"/>
+          </svg>
+        </span>
+
+        <span class="brand-name">
+          OFFRE BAC
+          <span class="brand-subtitle">فهم. جرّب. تطوّر.</span>
+        </span>
       </a>
-      <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-      <nav id="mainNav" class="nav">
-        <a href="#offer">العرض</a><a href="#subjects">المواد</a><a href="#steps">كيفاش نسجل</a><a href="#faq">أسئلة شائعة</a>
-        <a class="nav-cta" href="#register">نسجل دابا <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
+
+      <nav class="nav" id="mainNav" aria-label="القائمة الرئيسية">
+        <a href="#home">الرئيسية</a>
+        <a href="#subjects">المواد</a>
+        <a href="#schedule">استعمال الزمن</a>
+        <a href="#teachers">الأساتذة</a>
+        <a href="#questions">اسأل الأستاذ</a>
       </nav>
-    </header>
 
-    <main>
-      <section class="hero section-wrap" id="home">
-        <div class="hero-copy">
-          <div class="eyebrow"><span class="live-dot"></span> OFFRE BAC <span class="eyebrow-sep">/</span> نسخة 2027 · PC + SVT</div>
-          <h1 class="hero-main-title">هاد العام<br><span>الباك مضمون!</span></h1>
-          <p class="hero-lead">خلي هدفك واضح وخدم عليه بخطة منظمة. خمس مواد لعام دراسي كامل بـ <strong>899 DH</strong>، لتلاميذ الثانية باك PC وSVT، خيار فرنسية.</p>
+      <div class="header-actions">
+        <a class="btn btn-primary" href="#register">
+          ابدأ التسجيل
+        </a>
+
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          aria-label="فتح القائمة"
+          aria-expanded="false"
+          aria-controls="mainNav"
+          type="button"
+        >
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <main>
+
+    <!-- =========================================
+         HERO AND GALAXY PRICE
+    ========================================= -->
+
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+
+        <div class="hero-content">
+
+          <div class="hero-badge">
+            <span class="status-dot"></span>
+            تجربة تعليمية تفاعلية
+          </div>
+
+          <h1>
+            هاد العام<br>
+            <span class="accent">الباك مضمون.</span>
+          </h1>
+
+          <p class="hero-description">
+            حضّر للباكالوريا بطريقة ذكية.
+            تعلّم مع الأساتذة، جرّب التمارين،
+            وطرح أسئلتك كلما احتجت إلى توضيح.
+          </p>
+
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#offer">اكتشف العرض — 899 DH <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7 17 17M7 9v8h8"/></svg></span></a>
-            <a class="btn btn-ghost" href="#subjects">شوف المواد الخمسة</a>
-          </div>
-          <div class="hero-footnote"><span class="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span> التسجيل عبر واتساب <span class="footnote-dot">·</span> بلا أداء فالموقع</div>
-        </div>
-        <div class="hero-art" aria-label="بطاقة عرض Offre Bac">
-          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
-          <div class="float-chip chip-top">2ème BAC <span>· Option Français</span></div>
-          <div class="offer-card galaxy-card">
-            <div class="galaxy-ring galaxy-ring-one" aria-hidden="true"></div><div class="galaxy-ring galaxy-ring-two" aria-hidden="true"></div><span class="galaxy-star galaxy-star-one" aria-hidden="true"></span><span class="galaxy-star galaxy-star-two" aria-hidden="true"></span>
-            <div class="card-top"><span>OFFRE BAC / 2027</span><span class="card-status">PC · SVT</span></div>
-            <div class="card-symbol">ƒ<span>(x)</span></div>
-            <div class="card-title">باك خمس مواد</div>
-            <div class="card-price">899<span>DH</span></div>
-            <div class="card-line"></div>
-            <div class="card-bottom"><span>خدم على هدف الباك</span><span class="arrow-circle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
-          </div>
-          <div class="float-chip chip-bottom"><span class="mini-spark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/></svg></span> MATHS <span>عام كامل. هدف واحد.</span></div>
-          <div class="subject-orbit orbit-math" aria-label="رياضيات"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M30 8c-8-3-10 2-10 8v16c0 6-2 9-8 8"/><path d="M17 8h15"/></svg></div><div class="subject-orbit orbit-physics" aria-label="فيزياء"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M4 24c5-14 11-14 16 0s11 14 16 0 7-9 8-6"/></svg></div><div class="subject-orbit orbit-book" aria-label="اللغة الإنجليزية"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 12h14M15 12v25M9 37h13M27 37l7-20 7 20M30 30h8"/></svg></div>
-        </div>
-      </section>
+            <a href="#register" class="btn btn-primary">
+              اكتشف العرض
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
 
-      <section class="ticker" aria-label="المواد">
-        <div class="ticker-track">
-          <div class="ticker-group" aria-hidden="false"><span>MATHÉMATIQUES</span><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/></svg></i><span>PHYSIQUE-CHIMIE</span><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/></svg></i><span>SVT</span><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/></svg></i><span>ENGLISH</span><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/></svg></i><span>PHILOSOPHIE</span><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/></svg></i></div>
-          <div class="ticker-group" aria-hidden="true"><span>MATHÉMATIQUES</span><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/></svg></i><span>PHYSIQUE-CHIMIE</span><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/></svg></i><span>SVT</span><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/></svg></i><span>ENGLISH</span><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/></svg></i><span>PHILOSOPHIE</span><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/></svg></i></div>
-        </div>
-      </section>
+            <a href="#teachers" class="btn btn-secondary">
+              اكتشف الدروس
+            </a>
+          </div>
 
-      <section class="section-wrap subjects-section" id="subjects">
+          <div class="hero-meta">
+            <span>
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m5 12 4 4L19 6"/>
+                <circle cx="12" cy="12" r="10"/>
+              </svg>
+              خمس مواد دراسية
+            </span>
+
+            <span>
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 8v4l3 2"/>
+                <circle cx="12" cy="12" r="10"/>
+              </svg>
+              تعلّم حسب استعمال الزمن
+            </span>
+          </div>
+
+        </div>
+
+        <div class="galaxy-card" aria-label="عرض الباك بسعر 899 درهم">
+
+          <div class="galaxy-grid"></div>
+
+          <div class="orbit orbit-one"></div>
+          <div class="orbit orbit-two"></div>
+          <div class="orbit orbit-three"></div>
+
+          <span class="orbit-dot blue"></span>
+          <span class="orbit-dot coral"></span>
+          <span class="orbit-dot mint"></span>
+
+          <div class="galaxy-top">
+            <span class="galaxy-tag">PC · SVT</span>
+            <span>OFFRE BAC / 2027</span>
+          </div>
+
+          <div class="galaxy-center">
+
+            <div class="galaxy-math">
+              f<span>(x)</span>
+            </div>
+
+            <h2 class="galaxy-title">
+              باك خمس مواد
+            </h2>
+
+            <div class="price-line">
+              <span class="price-number">899</span>
+              <span class="price-currency">DH</span>
+            </div>
+
+            <p class="galaxy-caption">
+              عام دراسي كامل
+            </p>
+
+          </div>
+
+          <div class="galaxy-footer">
+            <span>2ème BAC · Option Français</span>
+            <strong>هدف واحد: النجاح</strong>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================
+         SUBJECTS
+    ========================================= -->
+
+    <section class="section subjects-section" id="subjects">
+      <div class="container">
+
         <div class="section-heading">
-          <div><div class="section-kicker">01 / المواد اللي فالعرض</div><h2>خمس مواد.<br><span>هدف واحد.</span></h2></div>
-          <p>المواد الخمسة مجموعين فعرض واحد.<br>لتلاميذ الثانية باك PC وSVT، خيار فرنسية.</p>
-        </div>
-        <div class="subject-grid">
-          <article class="subject-card subject-math">
-            <div class="subject-number">05 / 01</div>
-            <div class="subject-icon icon-math" aria-hidden="true"><svg viewBox="0 0 160 120"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><rect x="64" y="9" width="25" height="25" rx="4"/><path d="M76.5 34v19M76.5 53H42v17M76.5 53h35v17"/><rect x="29" y="70" width="25" height="25" rx="4"/><rect x="99" y="70" width="25" height="25" rx="4"/></g><text x="118" y="49" fill="currentColor" font-size="27" font-family="Georgia,serif">f(x)</text></svg></div>
-            <h3>Mathématiques</h3><span class="included">داخلة فالعرض</span>
-          </article>
-          <article class="subject-card subject-physics">
-            <div class="subject-number">05 / 02</div>
-            <div class="subject-icon icon-physics" aria-hidden="true"><svg viewBox="0 0 160 120"><g fill="none" stroke="currentColor" stroke-width="3.3"><ellipse cx="73" cy="60" rx="48" ry="19" transform="rotate(48 73 60)"/><ellipse cx="73" cy="60" rx="48" ry="19" transform="rotate(-48 73 60)"/><ellipse cx="73" cy="60" rx="48" ry="19" transform="rotate(90 73 60)"/><circle cx="73" cy="60" r="4" fill="currentColor" stroke="none"/></g><path d="M125 60q9-14 18 0t14 0" fill="none" stroke="currentColor" stroke-width="3"/></svg></div>
-            <h3>Physique-Chimie</h3><span class="included">داخلة فالعرض</span>
-          </article>
-          <article class="subject-card subject-svt">
-            <div class="subject-number">05 / 03</div>
-            <div class="subject-icon icon-svt" aria-hidden="true"><svg viewBox="0 0 160 120"><g fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"><path d="M31 83C48 64 62 64 79 73S110 86 130 62"/><path d="M35 76l-4 7 9 3M48 69l-2-9M61 68l7 9M78 73l-1 11M94 78l7-9M111 75l-2-10M125 66l5-4"/><path d="M77 29c-2 17 9 23 20 31s17 16 14 31"/><path d="M77 29l8-11M77 29l-8-6M91 48l10-6M91 48l-2-11M107 74l9-6M107 74l-7-8M111 91l-8 10M111 91l8 4"/></g><circle cx="143" cy="41" r="11" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="143" cy="41" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></div>
-            <h3>SVT</h3><span class="included">داخلة فالعرض</span>
-          </article>
-          <article class="subject-card subject-english">
-            <div class="subject-number">05 / 04</div>
-            <div class="subject-icon icon-english" aria-hidden="true"><svg viewBox="0 0 160 120"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M35 34h52M61 34v49M44 83h34"/><path d="M45 46l33 29M78 46L45 75"/><path d="M91 91l21-49 22 49M100 72h25"/><path d="M122 29h26" stroke-width="2"/></g><text x="123" y="51" fill="currentColor" font-size="24" font-family="Georgia,serif">Aa</text></svg></div>
-            <h3>Anglais</h3><span class="included">داخلة فالعرض</span>
-          </article>
-          <article class="subject-card subject-philo">
-            <div class="subject-number">05 / 05</div>
-            <div class="subject-icon icon-philo" aria-hidden="true"><svg viewBox="0 0 160 120"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M58 15h28M65 15v29L38 91q-7 12 7 12h55q14 0 7-12L80 44V15"/><path d="M50 78h46M58 64h31"/></g><text x="124" y="57" fill="currentColor" font-size="34" font-family="Georgia,serif">?</text><ellipse cx="71" cy="62" rx="58" ry="48" fill="none" stroke="currentColor" stroke-opacity=".15"/></svg></div>
-            <h3>Philosophie</h3><span class="included">داخلة فالعرض</span>
-          </article>
-        </div>
-        <p class="muted-note">تفاصيل المحتوى وكيفاش تستافد من العرض كتأكدها مع الفريق قبل أي أداء.</p>
-      </section>
-
-      <section class="steps-section" id="steps">
-        <div class="section-wrap">
-          <div class="section-heading">
-            <div><div class="section-kicker">02 / كيفاش تسجل</div><h2>الخطوة الجاية ديالك.<br><span>بكل بساطة.</span></h2></div>
-            <p>طلب التسجيل ما كيترتب عليه حتى أداء. تواصل مع الفريق وخذ التفاصيل قبل ما تقرر.</p>
+          <div>
+            <p class="eyebrow">01 / المواد الدراسية</p>
+            <h2>خمس مواد.<br>هدف واحد.</h2>
           </div>
-          <div class="steps-grid">
-            <article class="step"><span class="step-no">01</span><div class="step-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></div><h3>كتعمر المعلومات ديالك.</h3><p>الاسم، رقم الهاتف والمسلك ديالك PC أو SVT. ما محتاجش تفتح حساب.</p></article>
-            <article class="step"><span class="step-no">02</span><div class="step-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h3l2 5-2 2a15 15 0 0 0 4 4l2-2 5 2v3c0 1-1 2-2 2C10 19 5 14 4 5c0-1 1-2 3-2Z"/></svg></div><h3>كتصيفط الطلب عبر واتساب.</h3><p>زر التسجيل كيفتح رسالة واجدة فواتساب. ضغط على إرسال باش توصل معلوماتك للفريق.</p></article>
-            <article class="step"><span class="step-no">03</span><div class="step-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></div><h3>كتاخد قرارك من بعد ما تعرف التفاصيل.</h3><p>الفريق كيوضح ليك المحتوى وطريقة الاستفادة وشروط الأداء.</p></article>
+
+          <p class="section-description">
+            جميع المواد الأساسية في عرض واحد،
+            مع شروحات وتمارين لمساعدتك على الاستعداد للباك.
+          </p>
+        </div>
+
+        <div class="subjects-grid">
+
+          <article class="subject-card math">
+            <div class="subject-top">
+              <span>05 / 01</span>
+              <span>✓</span>
+            </div>
+
+            <div class="subject-symbol">
+              <svg viewBox="0 0 100 100" aria-hidden="true">
+                <rect x="39" y="8" width="22" height="22" rx="4"/>
+                <path d="M50 30v14M50 44H24v16M50 44h26v16"/>
+                <rect x="13" y="60" width="22" height="22" rx="4"/>
+                <rect x="65" y="60" width="22" height="22" rx="4"/>
+                <path d="M52 49h20"/>
+              </svg>
+            </div>
+
+            <h3>الرياضيات</h3>
+            <p>الدوال، التحليل والتمارين.</p>
+          </article>
+
+          <article class="subject-card physics">
+            <div class="subject-top">
+              <span>05 / 02</span>
+              <span>✓</span>
+            </div>
+
+            <div class="subject-symbol">
+              <svg viewBox="0 0 100 100" aria-hidden="true">
+                <ellipse cx="47" cy="50" rx="37" ry="15"
+                  transform="rotate(45 47 50)"/>
+                <ellipse cx="47" cy="50" rx="37" ry="15"
+                  transform="rotate(-45 47 50)"/>
+                <circle cx="47" cy="50" r="4"/>
+                <path d="M78 26h12M84 20v12"/>
+              </svg>
+            </div>
+
+            <h3>الفيزياء والكيمياء</h3>
+            <p>القوانين والتطبيقات.</p>
+          </article>
+
+          <article class="subject-card science">
+            <div class="subject-top">
+              <span>05 / 03</span>
+              <span>✓</span>
+            </div>
+
+            <div class="subject-symbol">
+              <svg viewBox="0 0 100 100" aria-hidden="true">
+                <path d="M16 60c16-16 26-16 39-8s22 8 32-5"/>
+                <path d="M20 56l-4 4 6 3M32 49l-1-7M44 49l5 7"/>
+                <path d="M49 20c-3 15 5 22 15 29s13 15 10 26"/>
+                <path d="M49 20l8-9M49 20l-7-4M61 39l8-4M61 39l-2-8"/>
+                <circle cx="83" cy="24" r="9"/>
+                <circle cx="83" cy="24" r="4"/>
+              </svg>
+            </div>
+
+            <h3>علوم الحياة والأرض</h3>
+            <p>الفهم والتدرب على الأسئلة.</p>
+          </article>
+
+          <article class="subject-card english">
+            <div class="subject-top">
+              <span>05 / 04</span>
+              <span>✓</span>
+            </div>
+
+            <div class="subject-symbol">
+              <svg viewBox="0 0 100 100" aria-hidden="true">
+                <path d="M12 23h38M31 23v50M18 73h26"/>
+                <path d="m17 34 28 27M45 34 17 61"/>
+                <path d="M50 76 67 35l18 41M57 60h21"/>
+              </svg>
+            </div>
+
+            <h3>الإنجليزية</h3>
+            <p>المفردات والتعبير والتمارين.</p>
+          </article>
+
+          <article class="subject-card philosophy">
+            <div class="subject-top">
+              <span>05 / 05</span>
+              <span>✓</span>
+            </div>
+
+            <div class="subject-symbol">
+              <svg viewBox="0 0 100 100" aria-hidden="true">
+                <path d="M35 12h28M41 12v28L20 78q-5 9 6 9h48q11 0 6-9L59 40V12"/>
+                <path d="M28 70h44M34 59h32"/>
+                <ellipse cx="50" cy="53" rx="42" ry="36"
+                  stroke-dasharray="3 5" opacity=".35"/>
+              </svg>
+            </div>
+
+            <h3>الفلسفة</h3>
+            <p>المنهجية وتحليل النصوص.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================
+         WEEKLY SCHEDULE
+         Exactly two sessions per day
+    ========================================= -->
+
+    <section class="section schedule-section" id="schedule">
+      <div class="container">
+
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">02 / التنظيم الأسبوعي</p>
+            <h2>استعمال الزمن</h2>
+          </div>
+
+          <p class="section-description">
+            برنامج أسبوعي متوازن بحصتين كل يوم،
+            لمساعدتك على تنظيم وقتك ومراجعة جميع المواد.
+          </p>
+        </div>
+
+        <div class="schedule-summary">
+          <span class="summary-chip">14 حصة أسبوعياً</span>
+          <span class="summary-chip">حصتان كل يوم</span>
+          <span class="summary-chip">5 مواد دراسية</span>
+        </div>
+
+        <div class="schedule-grid" role="list" aria-label="الجدول الأسبوعي">
+
+          <article class="day-card" role="listitem">
+            <div class="day-heading">
+              <h3>الأحد</h3>
+              <span class="day-count">02 حصص</span>
+            </div>
+            <div class="day-subjects">
+              <span class="schedule-chip philosophy">الفلسفة</span>
+              <span class="schedule-chip english">الإنجليزية</span>
+            </div>
+          </article>
+
+          <article class="day-card" role="listitem">
+            <div class="day-heading">
+              <h3>الإثنين</h3>
+              <span class="day-count">02 حصص</span>
+            </div>
+            <div class="day-subjects">
+              <span class="schedule-chip math">الرياضيات</span>
+              <span class="schedule-chip physics">الفيزياء والكيمياء</span>
+            </div>
+          </article>
+
+          <article class="day-card" role="listitem">
+            <div class="day-heading">
+              <h3>الثلاثاء</h3>
+              <span class="day-count">02 حصص</span>
+            </div>
+            <div class="day-subjects">
+              <span class="schedule-chip math">الرياضيات</span>
+              <span class="schedule-chip science">علوم الحياة والأرض</span>
+            </div>
+          </article>
+
+          <article class="day-card" role="listitem">
+            <div class="day-heading">
+              <h3>الأربعاء</h3>
+              <span class="day-count">02 حصص</span>
+            </div>
+            <div class="day-subjects">
+              <span class="schedule-chip english">الإنجليزية</span>
+              <span class="schedule-chip physics">الفيزياء والكيمياء</span>
+            </div>
+          </article>
+
+          <article class="day-card" role="listitem">
+            <div class="day-heading">
+              <h3>الخميس</h3>
+              <span class="day-count">02 حصص</span>
+            </div>
+            <div class="day-subjects">
+              <span class="schedule-chip math">الرياضيات</span>
+              <span class="schedule-chip science">علوم الحياة والأرض</span>
+            </div>
+          </article>
+
+          <article class="day-card" role="listitem">
+            <div class="day-heading">
+              <h3>الجمعة</h3>
+              <span class="day-count">02 حصص</span>
+            </div>
+            <div class="day-subjects">
+              <span class="schedule-chip math">الرياضيات</span>
+              <span class="schedule-chip philosophy">الفلسفة</span>
+            </div>
+          </article>
+
+          <article class="day-card" role="listitem">
+            <div class="day-heading">
+              <h3>السبت</h3>
+              <span class="day-count">02 حصص</span>
+            </div>
+            <div class="day-subjects">
+              <span class="schedule-chip physics">الفيزياء والكيمياء</span>
+              <span class="schedule-chip science">علوم الحياة والأرض</span>
+            </div>
+          </article>
+
+        </div>
+
+        <p class="schedule-note">
+          هذا توزيع مقترح للحصص. يمكن تعديل الأيام أو إضافة توقيت كل حصة حسب البرنامج الفعلي.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- =========================================
+         TEACHERS AND LESSONS
+    ========================================= -->
+
+    <section class="section teachers-section" id="teachers">
+      <div class="container">
+
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">03 / شرح الدروس</p>
+            <h2>تعلّم مع الأساتذة.<br><span class="accent">بالصورة والشرح.</span></h2>
+          </div>
+
+          <p class="section-description">
+            شاهد الشرح، تابع التمارين، وإذا ما فهمتيش شي نقطة،
+            استعمل زر طرح السؤال للتواصل مع الأستاذ.
+          </p>
+        </div>
+
+        <div class="teacher-grid">
+
+          <!-- Mathematics teacher -->
+
+          <article class="teacher-card teacher-math">
+            <div class="teacher-photo">
+              <img
+                src="MATH.JPG"
+                alt="الأستاذ أثناء شرح الرياضيات"
+                loading="lazy"
+                onerror="this.hidden=true;this.nextElementSibling.hidden=false"
+              >
+
+              <div class="photo-fallback" hidden>
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                  <path d="M10 52h44M17 45l10-12 8 7 12-18M39 22h8v8"/>
+                </svg>
+                <span>الرياضيات</span>
+              </div>
+
+              <span class="photo-label">MATHEMATIQUES</span>
+            </div>
+
+            <div class="teacher-info">
+              <h3>الرياضيات</h3>
+              <p>
+                شرح الدروس والتمارين والاستعداد للامتحان الوطني.
+              </p>
+
+              <div class="teacher-actions">
+                <a class="btn btn-secondary" href="#questions"
+                   data-subject="الرياضيات">
+                  شاهد الدرس
+                </a>
+
+                <button class="btn btn-mint ask-teacher"
+                        type="button" data-subject="الرياضيات">
+                  عندي سؤال
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Physics and chemistry teacher -->
+
+          <article class="teacher-card teacher-physics">
+            <div class="teacher-photo">
+              <img
+                src="PC.JPG"
+                alt="الأستاذ أثناء شرح الفيزياء والكيمياء"
+                loading="lazy"
+                onerror="this.hidden=true;this.nextElementSibling.hidden=false"
+              >
+
+              <div class="photo-fallback" hidden>
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                  <circle cx="32" cy="32" r="5"/>
+                  <ellipse cx="32" cy="32" rx="25" ry="10"/>
+                  <ellipse cx="32" cy="32" rx="25" ry="10"
+                           transform="rotate(60 32 32)"/>
+                  <ellipse cx="32" cy="32" rx="25" ry="10"
+                           transform="rotate(120 32 32)"/>
+                </svg>
+                <span>الفيزياء والكيمياء</span>
+              </div>
+
+              <span class="photo-label">PHYSIQUE · CHIMIE</span>
+            </div>
+
+            <div class="teacher-info">
+              <h3>الفيزياء والكيمياء</h3>
+              <p>
+                توضيح المفاهيم والقوانين بالتطبيق والأمثلة.
+              </p>
+
+              <div class="teacher-actions">
+                <a class="btn btn-secondary" href="#questions"
+                   data-subject="الفيزياء والكيمياء">
+                  شاهد الدرس
+                </a>
+
+                <button class="btn btn-mint ask-teacher"
+                        type="button" data-subject="الفيزياء والكيمياء">
+                  عندي سؤال
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- SVT teacher -->
+
+          <article class="teacher-card teacher-svt">
+            <div class="teacher-photo">
+              <img
+                src="SVT.JPG"
+                alt="الأستاذ أثناء شرح علوم الحياة والأرض"
+                loading="lazy"
+                onerror="this.hidden=true;this.nextElementSibling.hidden=false"
+              >
+
+              <div class="photo-fallback" hidden>
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                  <path d="M32 54V28"/>
+                  <path d="M32 39C10 39 8 19 8 19s20-2 24 20"/>
+                  <path d="M32 31C32 10 53 8 56 8s2 22-24 23"/>
+                  <path d="M18 49h28"/>
+                </svg>
+                <span>علوم الحياة والأرض</span>
+              </div>
+
+              <span class="photo-label">SVT</span>
+            </div>
+
+            <div class="teacher-info">
+              <h3>علوم الحياة والأرض</h3>
+              <p>
+                فهم الظواهر العلمية والتدرب على أسئلة الامتحان.
+              </p>
+
+              <div class="teacher-actions">
+                <a class="btn btn-secondary" href="#questions"
+                   data-subject="علوم الحياة والأرض">
+                  شاهد الدرس
+                </a>
+
+                <button class="btn btn-mint ask-teacher"
+                        type="button" data-subject="علوم الحياة والأرض">
+                  عندي سؤال
+                </button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================
+         ASK THE TEACHER
+    ========================================= -->
+
+    <section class="section question-section" id="questions">
+      <div class="container">
+
+        <div class="question-panel">
+
+          <div class="question-intro">
+
+            <div class="question-icon">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8
+                  8.5 8.5 0 0 1-7.6 4.7
+                  8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7
+                  A8.4 8.4 0 0 1 4 11.5
+                  8.5 8.5 0 0 1 8.7 3.9
+                  8.4 8.4 0 0 1 12.5 3h.5
+                  a8.5 8.5 0 0 1 8 8.5z"/>
+              </svg>
+            </div>
+
+            <p class="eyebrow">04 / التعلّم التفاعلي</p>
+
+            <h2>
+              ما فهمتيش شي حاجة؟<br>
+              <span class="accent">سول الأستاذ.</span>
+            </h2>
+
+            <p>
+              اختار المادة، اكتب سؤالك، وغادي نوجد لك رسالة
+              تقدر ترسلها للأستاذ عبر واتساب.
+            </p>
+
+            <p class="form-help">
+              إرسال الرسالة يتم بعد الضغط على زر واتساب.
+              هذا النموذج لا يضمن جواباً فورياً من الأستاذ.
+            </p>
+
+          </div>
+
+          <form class="question-form" id="questionForm">
+
+            <div class="field">
+              <label for="studentName">الاسم</label>
+              <input
+                id="studentName"
+                name="studentName"
+                type="text"
+                placeholder="اكتب اسمك"
+                autocomplete="name"
+                required
+                maxlength="80"
+              >
+            </div>
+
+            <div class="field">
+              <label for="subjectSelect">المادة</label>
+              <select id="subjectSelect" name="subject" required>
+                <option value="الرياضيات">الرياضيات</option>
+                <option value="الفيزياء والكيمياء">الفيزياء والكيمياء</option>
+                <option value="علوم الحياة والأرض">علوم الحياة والأرض</option>
+                <option value="الإنجليزية">الإنجليزية</option>
+                <option value="الفلسفة">الفلسفة</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="lessonName">عنوان الدرس (اختياري)</label>
+              <input
+                id="lessonName"
+                name="lessonName"
+                type="text"
+                placeholder="مثلاً: النهايات، الكهرباء..."
+                maxlength="120"
+              >
+            </div>
+
+            <div class="field">
+              <label for="questionText">سؤالك للأستاذ</label>
+              <textarea
+                id="questionText"
+                name="question"
+                placeholder="شرح ليا النقطة اللي ما فهمتيش..."
+                required
+                maxlength="2000"
+              ></textarea>
+            </div>
+
+            <p class="form-feedback" id="formFeedback" aria-live="polite"></p>
+
+            <button type="submit" class="btn btn-primary btn-block">
+              إرسال السؤال عبر واتساب
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M22 2 11 13"/>
+                <path d="m22 2-7 20-4-9-9-4z"/>
+              </svg>
+            </button>
+
+          </form>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================
+         HOW IT WORKS
+    ========================================= -->
+
+    <section class="section steps-section" id="how-it-works">
+      <div class="container">
+
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">05 / طريقة الاستفادة</p>
+            <h2>خطوات بسيطة.<br>تعلّم أفضل.</h2>
+          </div>
+
+          <p class="section-description">
+            اتبع برنامجك، شاهد الشرح، واسأل عندما تحتاج إلى مساعدة.
+          </p>
+        </div>
+
+        <div class="steps-grid">
+
+          <article class="step-card">
+            <span class="step-number">STEP / 01</span>
+
+            <div class="step-icon">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="17" rx="2"/>
+                <path d="M16 2v4M8 2v4M3 10h18"/>
+                <path d="m9 15 2 2 4-4"/>
+              </svg>
+            </div>
+
+            <h3>نظّم وقتك</h3>
+            <p>
+              استعمل الجدول الأسبوعي باش توزع المراجعة على جميع المواد.
+            </p>
+          </article>
+
+          <article class="step-card">
+            <span class="step-number">STEP / 02</span>
+
+            <div class="step-icon">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="16" rx="3"/>
+                <path d="m10 8 6 4-6 4z"/>
+              </svg>
+            </div>
+
+            <h3>شاهد الدرس</h3>
+            <p>
+              تابع شرح الأستاذ ودوّن الملاحظات المهمة أثناء التعلّم.
+            </p>
+          </article>
+
+          <article class="step-card">
+            <span class="step-number">STEP / 03</span>
+
+            <div class="step-icon">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8
+                  8.5 8.5 0 0 1-7.6 4.7
+                  8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7
+                  A8.4 8.4 0 0 1 4 11.5"/>
+                <path d="M9 10a3 3 0 0 1 6 0c0 2-3 2-3 4M12 17h.01"/>
+              </svg>
+            </div>
+
+            <h3>اسأل وتدرّب</h3>
+            <p>
+              إذا ما فهمتيش شي نقطة، صيفط سؤالك للأستاذ وتدرّب على التمارين.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================
+         FAQ
+    ========================================= -->
+
+    <section class="section" id="faq">
+      <div class="container">
+
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">06 / أسئلة شائعة</p>
+            <h2>عندك شي سؤال؟</h2>
           </div>
         </div>
-      </section>
 
-      <section class="register-section section-wrap" id="register">
-        <div class="register-intro">
-          <div class="section-kicker">03 / التسجيل</div>
-          <h2>قريب تكون واجد<br><span>للخطوة الجاية.</span></h2>
-          <p>عمر المعلومات ديالك واضغط على التسجيل. غادي يتحل واتساب برسالة فيها معلوماتك؛ ضغط على إرسال باش توصلنا.</p>
-          <div class="price-stamp"><span>العرض الكامل</span><strong>899 <small>DH</small></strong><span>خمس مواد · عام دراسي كامل</span></div>
-        </div>
-        <form id="registerForm" class="register-form">
-          <label for="fullName">الاسم الكامل</label>
-          <input id="fullName" name="fullName" type="text" placeholder="الاسم الشخصي والعائلي" autocomplete="name" required minlength="2">
-          <label for="phone">رقم الهاتف المغربي</label>
-          <input id="phone" name="phone" type="tel" placeholder="06 12 34 56 78" autocomplete="tel" required>
-          <small class="field-hint">رقم كيبدا بـ 05 أو 06 أو 07، أو بـ +212 متبوعة بـ 9 أرقام</small>
-          <label>المسلك ديالك · خيار فرنسية</label>
-          <div class="track-options">
-            <label class="track-option"><input type="radio" name="track" value="2ème BAC PC — Sciences Physiques" required><span><b>2ème BAC PC</b><small>Sciences Physiques</small></span></label>
-            <label class="track-option"><input type="radio" name="track" value="2ème BAC SVT — Sciences de la Vie et de la Terre" required><span><b>2ème BAC SVT</b><small>Sciences de la Vie et de la Terre</small></span></label>
-          </div>
-          <div class="form-summary"><div class="summary-logo">OB</div><div><strong>Offre Bac · خمس مواد</strong><small>التواصل عبر واتساب</small></div><b>899 DH</b></div>
-          <button class="btn btn-primary submit-btn" type="submit">تأكيد عبر واتساب <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></button>
-          <p class="form-privacy">خاصك تضغط على إرسال فواتساب لإتمام الطلب · بلا أداء فالموقع</p>
-          <p class="form-error" id="formError" role="alert" hidden></p>
-        </form>
-      </section>
-
-      <section class="faq-section section-wrap" id="faq">
-        <div class="section-heading"><div><div class="section-kicker">04 / نجاوبو على أسئلتك</div><h2>عندك شي سؤال؟<br><span>نجاوبوك بوضوح.</span></h2></div><a class="text-link" href="https://wa.me/212663271459" target="_blank" rel="noopener">سؤال آخر؟ راسلنا عبر واتساب <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></div>
         <div class="faq-list">
-          <details open><summary>شنو كيتضمن عرض Offre Bac؟ <span>＋</span></summary><p>العرض بـ 899 درهم كيشمل الرياضيات، الفيزياء والكيمياء، علوم الحياة والأرض، الإنجليزية والفلسفة لعام دراسي كامل. تفاصيل المحتوى وطريقة الاستفادة كتأكد مع الفريق قبل أي أداء.</p></details>
-          <details><summary>شكون يقدر يستافد من العرض؟ <span>＋</span></summary><p>تلاميذ الثانية باك علوم فيزيائية أو علوم الحياة والأرض، خيار فرنسية.</p></details>
-          <details><summary>كيفاش نقدر نسجل؟ <span>＋</span></summary><p>عمر الاسم، رقم الهاتف والمسلك. اضغط على التسجيل باش يتحل واتساب، ومن بعد ضغط على إرسال باش توصلنا الرسالة.</p></details>
-          <details><summary>واش يمكن نجرب المختبر قبل التسجيل؟ <span>＋</span></summary><p>نعم، تقدر تفتح المختبر التفاعلي وتجرب المواد مجاناً بلا حساب. هادو تجارب توضيحية، ماشي دروس كاملة ولا المحتوى ديال العرض.</p></details>
-          <details><summary>شنو هي طريقة الأداء؟ <span>＋</span></summary><p>طريقة الأداء والشروط كتأكد مباشرة مع الفريق قبل أي التزام. الموقع ما كيقبلش الأداء الإلكتروني حالياً.</p></details>
+
+          <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              شنو المواد الموجودة في العرض؟
+              <span class="faq-plus">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              الرياضيات، الفيزياء والكيمياء، علوم الحياة والأرض،
+              الإنجليزية والفلسفة.
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              واش نقدر نسول الأستاذ إلا ما فهمتش؟
+              <span class="faq-plus">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              نعم، يمكنك كتابة سؤالك واختيار المادة ثم فتح واتساب
+              لإرسال الرسالة إلى الأستاذ.
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              شحال ثمن العرض؟
+              <span class="faq-plus">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              الثمن المعروض في الموقع هو 899 درهم للعرض الدراسي.
+              تأكد من شروط التسجيل والتفاصيل قبل الدفع.
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              واش الجدول قابل للتغيير؟
+              <span class="faq-plus">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              نعم، هذا جدول مقترح لتنظيم المراجعة، ويمكن تعديله
+              حسب أوقات الدروس الفعلية.
+            </div>
+          </article>
+
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="final-cta"><div class="section-wrap final-cta-inner"><div><div class="section-kicker">OFFRE BAC · 2027</div><h2>الفهم كيبدّل كلشي.<br><span>وجد للباك بخطوة واضحة.</span></h2></div><a class="btn btn-primary" href="#register">بغيت نسجل <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a></div></section>
-    </main>
+    <!-- =========================================
+         REGISTRATION CTA
+    ========================================= -->
 
-    <footer class="footer section-wrap">
-      <div class="footer-main"><a class="brand" href="#home"><span class="brand-mark">OB</span><span><strong>OFFRE BAC</strong><small>فهم، جرّب، تطوّر</small></span></a><p>معاك فالخطوة الجاية.</p><a class="footer-whatsapp" href="https://wa.me/212663271459" target="_blank" rel="noopener">تواصل معانا عبر واتساب <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></div>
-      <div class="footer-legal"><p><strong>سياسة الخصوصية:</strong> ملي كتضغط على التسجيل، الموقع كيفتح واتساب برسالة فيها الاسم ورقم الهاتف والمسلك والعرض. ما كتتصيفطش حتى تضغط بنفسك على إرسال فواتساب. الموقع ما كيخزنش معلومات الاستمارة فقاعدة بيانات.</p><p><strong>شروط الاستخدام:</strong> التجارب التفاعلية أمثلة توضيحية مجانية، بلا ضمان لأي نتيجة. المحتوى، طريقة الولوج، شروط الأداء والاسترجاع كتأكدها مع الفريق قبل أي التزام.</p><button id="clearProgress" class="clear-btn">مسح التفضيلات المحفوظة فهاد الجهاز</button></div>
-      <div class="footer-bottom"><span>© 2026 Offre Bac.</span><div><a href="#offer">العرض</a><a href="#subjects">المواد</a><a href="#steps">كيفاش نسجل</a><a href="#faq">أسئلة شائعة</a></div></div>
-    </footer>
-  </div>
-  <script src="script.js"></script>
+    <section class="final-cta" id="register">
+      <div class="container final-cta-inner">
+
+        <div>
+          <h2>بدا الاستعداد للباك من اليوم.</h2>
+          <p>
+            نظّم وقتك، افهم الدروس، وما تخليش الأسئلة بلا جواب.
+          </p>
+        </div>
+
+        <a class="btn" id="registerWhatsApp" href="#questions">
+          تواصل معنا للتسجيل
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================
+       FOOTER
+  ========================================= -->
+
+  <footer class="footer">
+    <div class="container">
+
+      <div class="footer-main">
+
+        <div>
+          <a class="brand" href="#home">
+            <span class="brand-mark">
+              <svg viewBox="0 0 32 32" class="icon" aria-hidden="true">
+                <path d="M8 22V10h4l8 9V10h4v12h-4l-8-9v9z"
+                  fill="currentColor" stroke="none"/>
+              </svg>
+            </span>
+
+            <span class="brand-name">
+              OFFRE BAC
+              <span class="brand-subtitle">فهم. جرّب. تطوّر.</span>
+            </span>
+          </a>
+
+          <p class="footer-description">
+            منصة لمساعدتك على تنظيم الاستعداد للباكالوريا
+            والتعلّم من خلال الشرح والتمارين والتواصل مع الأساتذة.
+          </p>
+        </div>
+
+        <div class="footer-links">
+          <a href="#subjects">المواد</a>
+          <a href="#schedule">استعمال الزمن</a>
+          <a href="#teachers">الأساتذة</a>
+          <a href="#questions">طرح سؤال</a>
+          <a href="#faq">الأسئلة الشائعة</a>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <span>
+          © <span id="currentYear"></span> Offre Bac
+        </span>
+        <span>معاك للخطوة الجاية.</span>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- =========================================
+       JAVASCRIPT
+  ========================================= -->
+
+  <script>
+    "use strict";
+
+    /* =========================================
+       1. CONFIGURATION
+    ========================================= */
+
+    /*
+      IMPORTANT:
+      Replace this example number with your real WhatsApp
+      number in international format, without + or spaces.
+
+      Example format for Morocco: 2126XXXXXXXX
+
+      This is an example only, not a verified contact number.
+    */
+
+    const WHATSAPP_NUMBER = "212600000000";
+
+    /* =========================================
+       2. MOBILE NAVIGATION
+    ========================================= */
+
+    const menuToggle = document.getElementById("menuToggle");
+    const mainNav = document.getElementById("mainNav");
+
+    function closeMenu() {
+      mainNav.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.setAttribute("aria-label", "فتح القائمة");
+    }
+
+    menuToggle.addEventListener("click", function () {
+      const isOpen = mainNav.classList.toggle("open");
+
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+
+      menuToggle.setAttribute(
+        "aria-label",
+        isOpen ? "إغلاق القائمة" : "فتح القائمة"
+      );
+    });
+
+    mainNav.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", closeMenu);
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        closeMenu();
+      }
+    });
+
+    document.addEventListener("click", function (event) {
+      const clickedInsideNav = mainNav.contains(event.target);
+      const clickedToggle = menuToggle.contains(event.target);
+
+      if (!clickedInsideNav && !clickedToggle) {
+        closeMenu();
+      }
+    });
+
+    /* =========================================
+       3. WHATSAPP URL BUILDER
+    ========================================= */
+
+    function buildWhatsAppUrl(message) {
+      const encodedMessage = encodeURIComponent(message);
+
+      return "https://wa.me/" +
+        WHATSAPP_NUMBER +
+        "?text=" +
+        encodedMessage;
+    }
+
+    function openWhatsApp(message) {
+      const url = buildWhatsAppUrl(message);
+
+      window.open(
+        url,
+        "_blank",
+        "noopener,noreferrer"
+      );
+    }
+
+    /* =========================================
+       4. PREFILL QUESTION FORM FROM SUBJECT CARD
+    ========================================= */
+
+    const subjectSelect = document.getElementById("subjectSelect");
+    const questionText = document.getElementById("questionText");
+
+    document.querySelectorAll(".ask-teacher").forEach(function (button) {
+      button.addEventListener("click", function () {
+        const subject = button.dataset.subject;
+
+        if (subject) {
+          subjectSelect.value = subject;
+        }
+
+        document.getElementById("questions").scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+        window.setTimeout(function () {
+          questionText.focus();
+        }, 450);
+      });
+    });
+
+    document.querySelectorAll(".teacher-actions a[data-subject]")
+      .forEach(function (link) {
+        link.addEventListener("click", function () {
+          const subject = link.dataset.subject;
+
+          if (subject) {
+            subjectSelect.value = subject;
+          }
+        });
+      });
+
+    /* =========================================
+       5. QUESTION FORM VALIDATION AND WHATSAPP
+    ========================================= */
+
+    const questionForm = document.getElementById("questionForm");
+    const formFeedback = document.getElementById("formFeedback");
+
+    questionForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const studentName =
+        document.getElementById("studentName").value.trim();
+
+      const subject =
+        document.getElementById("subjectSelect").value;
+
+      const lessonName =
+        document.getElementById("lessonName").value.trim();
+
+      const question =
+        document.getElementById("questionText").value.trim();
+
+      if (!studentName || !subject || !question) {
+        formFeedback.textContent =
+          "يرجى ملء الاسم والمادة والسؤال قبل المتابعة.";
+
+        return;
+      }
+
+      if (WHATSAPP_NUMBER === "212600000000") {
+        formFeedback.textContent =
+          "تنبيه: غيّر رقم واتساب التجريبي في الكود إلى رقمك الحقيقي.";
+
+        return;
+      }
+
+      const messageParts = [
+        "السلام عليكم أستاذ،",
+        "",
+        "أنا التلميذ(ة): " + studentName,
+        "المادة: " + subject
+      ];
+
+      if (lessonName) {
+        messageParts.push("الدرس: " + lessonName);
+      }
+
+      messageParts.push(
+        "",
+        "السؤال:",
+        question,
+        "",
+        "شكراً على المساعدة."
+      );
+
+      const message = messageParts.join("\n");
+
+      formFeedback.textContent =
+        "تم تجهيز الرسالة. أكمل إرسالها داخل واتساب.";
+
+      openWhatsApp(message);
+    });
+
+    /* =========================================
+       6. FAQ ACCORDION
+    ========================================= */
+
+    const faqItems = document.querySelectorAll(".faq-item");
+
+    faqItems.forEach(function (item) {
+      const button = item.querySelector(".faq-question");
+      const answer = item.querySelector(".faq-answer");
+
+      button.addEventListener("click", function () {
+        const wasOpen = button.getAttribute("aria-expanded") === "true";
+
+        faqItems.forEach(function (otherItem) {
+          const otherButton =
+            otherItem.querySelector(".faq-question");
+
+          const otherAnswer =
+            otherItem.querySelector(".faq-answer");
+
+          otherButton.setAttribute("aria-expanded", "false");
+          otherAnswer.hidden = true;
+          otherItem.classList.remove("open");
+        });
+
+        if (!wasOpen) {
+          button.setAttribute("aria-expanded", "true");
+          answer.hidden = false;
+          item.classList.add("open");
+        }
+      });
+    });
+
+    /* =========================================
+       7. REGISTRATION WHATSAPP BUTTON
+    ========================================= */
+
+    const registerWhatsApp =
+      document.getElementById("registerWhatsApp");
+
+    registerWhatsApp.addEventListener("click", function (event) {
+      if (WHATSAPP_NUMBER === "212600000000") {
+        event.preventDefault();
+
+        document.getElementById("questions").scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+        formFeedback.textContent =
+          "للتسجيل عبر واتساب، غيّر رقم واتساب التجريبي في الكود أولاً.";
+
+        return;
+      }
+
+      event.preventDefault();
+
+      const message =
+        "السلام عليكم، أريد الاستفسار عن التسجيل في عرض Offre Bac " +
+        "بثمن 899 درهم.";
+
+      openWhatsApp(message);
+    });
+
+    /* =========================================
+       8. CURRENT YEAR
+    ========================================= */
+
+    document.getElementById("currentYear").textContent =
+      new Date().getFullYear();
+
+    /* =========================================
+       9. IMAGE FALLBACK
+    ========================================= */
+
+    document.querySelectorAll(".teacher-photo img").forEach(function (img) {
+      img.addEventListener("error", function () {
+        img.hidden = true;
+
+        const fallback = img.nextElementSibling;
+
+        if (fallback && fallback.classList.contains("photo-fallback")) {
+          fallback.hidden = false;
+        }
+      });
+
+      img.addEventListener("load", function () {
+        const fallback = img.nextElementSibling;
+
+        if (fallback && fallback.classList.contains("photo-fallback")) {
+          fallback.hidden = true;
+        }
+
+        img.hidden = false;
+      });
+    });
+
+    /* =========================================
+       10. RESPONSIVE SAFETY
+    ========================================= */
+
+    window.addEventListener("resize", function () {
+      if (window.innerWidth > 780) {
+        closeMenu();
+      }
+    });
+  </script>
+
 </body>
 </html>
