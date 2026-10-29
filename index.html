@@ -2340,9 +2340,13 @@
       // Track the registration button click.
       // This event means the user initiated registration, not that
       // a WhatsApp message was successfully sent.
-      if (typeof window.fbq === "function") {
-        window.fbq("trackCustom", "RegistrationInitiated");
-      }
+      // Track registration confirmation as Purchase
+if (typeof window.fbq === "function") {
+  window.fbq("track", "Purchase", {
+    value: 899,
+    currency: "MAD"
+  });
+}
 
       const whatsappURL =
         "https://wa.me/" + WHATSAPP_NUMBER +
