@@ -3036,6 +3036,73 @@ a,button,input,select{touch-action:manipulation}
       const WHATSAPP_NUMBER = "212663271459";
 
       registrationForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  formMessage.style.display = "none";
+  formMessage.textContent = "";
+
+  if (!registrationForm.checkValidity()) {
+    registrationForm.reportValidity();
+    return;
+  }
+
+  const fullName = document.getElementById("fullName").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const branch = document.getElementById("branch").value;
+  const level = "الثانية باكالوريا";
+
+  if (fullName.length < 3) {
+    showFormError("يرجى إدخال الاسم الكامل بشكل صحيح.");
+    return;
+  }
+
+  const normalizedPhone = normalizePhoneNumber(phone);
+
+  if (!normalizedPhone) {
+    showFormError("يرجى إدخال رقم هاتف صحيح، مثال: 0612345678 أو +212612345678.");
+    return;
+  }
+
+  const allowedBranches = [
+    "العلوم الفيزيائية",
+    "علوم الحياة والأرض",
+    "STE",
+    "STM",
+    "BAC LIBRE",
+    "BP"
+  ];
+
+  if (!allowedBranches.includes(branch)) {
+    showFormError("يرجى اختيار الشعبة.");
+    return;
+  }
+
+  const orderId = "OB-" + Date.now() + "-" +
+    Math.random().toString(36).substring(2, 8).toUpperCase();
+
+  const order = {
+    orderId: orderId,
+    fullName: fullName,
+    phone: normalizedPhone,
+    branch: branch,
+    level: level
+  };
+
+  try {
+    sessionStorage.setItem(
+      "offreBacPendingOrder",
+      JSON.stringify(order)
+    );
+  } catch (error) {
+    showFormError("تعذر حفظ بيانات التسجيل. يرجى المحاولة مجدداً.");
+    return;
+  }
+
+  const thankYouURL = new URL("tankupage.html", window.location.href);
+  thankYouURL.searchParams.set("orderId", orderId);
+
+  window.location.assign(thankYouURL.toString());
+});
         event.preventDefault();
 
         formMessage.style.display = "none";
