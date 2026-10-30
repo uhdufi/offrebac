@@ -67,304 +67,129 @@ h1{margin:0 0 14px;color:var(--navy);font-size:clamp(25px,5vw,34px);font-weight:
 
     </main>
 
- 
-<script>
-(function () {
-  "use strict";
+    <script>
+      (function () {
+        "use strict";
 
-  const WHATSAPP_NUMBER = "212663271459";
-  const REDIRECT_DELAY_SECONDS = 10;
+        const WHATSAPP_NUMBER = "212663271459";
+        const REDIRECT_DELAY_SECONDS = 10;
 
-  const API_URL =
-    "https://offre-bac-orders.adamrouane129.workers.dev";
+        const params = new URLSearchParams(window.location.search);
 
-  const params = new URLSearchParams(window.location.search);
-  const orderId = (params.get("orderId") || "").trim();
+        const fullName = (params.get("fullName") || "").trim();
+        const phone = (params.get("phone") || "").trim();
+        const branch = (params.get("branch") || "").trim();
+        const level = (params.get("level") || "الثانية باكالوريا").trim();
 
-  const STORAGE_KEY = "offreBacPendingOrder";
+        const normalizedPhone = normalizePhoneNumber(phone);
 
-  const errorBox = document.getElementById("dataError");
-  const button = document.getElementById("whatsappButton");
-  const countdownText = document.getElementById("countdownText");
-  const countdownNumber = document.getElementById("countdownNumber");
-  const messageElement = document.getElementById("thankyouMessage");
+        const validName = fullName.length >= 3;
+        const validPhone = Boolean(normalizedPhone);
+        const validBranch =
+        branch === "العلوم الفيزيائية" ||
+    branch === "علوم الحياة والأرض" ||
+    branch === "STE" ||
+    branch === "STM" ||
+    branch === "BAC LIBRE" ||
+    branch === "BP";
 
-  const heading = document.querySelector(".thankyou-card h1");
-  const nextStep = document.querySelector(".next-step");
+        function normalizePhoneNumber(value) {
 
-  let countdownTimer = null;
-  let whatsappURL = "";
-  let isSaving = false;
+          const digitMap = {
+            "٠":"0", "١":"1", "٢":"2", "٣":"3", "٤":"4",
+            "٥":"5", "٦":"6", "٧":"7", "٨":"8", "٩":"9",
+            "۰":"0", "۱":"1", "۲":"2", "۳":"3", "۴":"4",
+            "۵":"5", "۶":"6", "۷":"7", "۸":"8", "۹":"9"
+          };
 
-  button.style.display = "none";
-  countdownText.style.display = "none";
-  errorBox.style.display = "none";
+          let number = String(value || "").replace(
+            /[٠-٩۰-۹]/g,
+            digit => digitMap[digit]
+          );
 
-  function showError(message) {
-    errorBox.textContent = message;
-    errorBox.style.display = "block";
-    button.style.display = "none";
-    countdownText.style.display = "none";
-  }
+          number = number.replace(/[\s().-]/g, "");
 
-  function normalizePhoneNumber(value) {
-    const digitMap = {
-      "٠":"0", "١":"1", "٢":"2", "٣":"3", "٤":"4",
-      "٥":"5", "٦":"6", "٧":"7", "٨":"8", "٩":"9",
-      "۰":"0", "۱":"1", "۲":"2", "۳":"3", "۴":"4",
-      "۵":"5", "۶":"6", "۷":"7", "۸":"8", "۹":"9"
-    };
+          if (number.startsWith("00")) {
+            number = "+" + number.slice(2);
+          }
 
-    let number = String(value || "").replace(
-      /[٠-٩۰-۹]/g,
-      digit => digitMap[digit]
-    );
+          if (
+            number.startsWith("0") &&
+            /^0[5-7][0-9]{8}$/.test(number)
+          ) {
+            number = "+212" + number.slice(1);
 
-    number = number.replace(/[\s().-]/g, "");
+          } else if (/^[5-7][0-9]{8}$/.test(number)) {
 
-    if (number.startsWith("00")) {
-      number = "+" + number.slice(2);
-    }
+            number = "+212" + number;
 
-    if (/^0[5-7][0-9]{8}$/.test(number)) {
-      number = "+212" + number.slice(1);
-    } else if (/^[5-7][0-9]{8}$/.test(number)) {
-      number = "+212" + number;
-    } else if (/^212[5-7][0-9]{8}$/.test(number)) {
-      number = "+" + number;
-    }
+          } else if (/^212[5-7][0-9]{8}$/.test(number)) {
 
-    return /^\+[1-9][0-9]{7,14}$/.test(number)
-      ? number
-      : "";
-  }
+            number = "+" + number;
+          }
 
-  function startWhatsAppCountdown() {
-    let secondsRemaining = REDIRECT_DELAY_SECONDS;
-
-    heading.textContent = "تم حفظ طلبك بنجاح!";
-    messageElement.textContent =
-      "شكراً لثقتك بنا. تم حفظ معلومات تسجيلك بأمان. بقيت خطوة أخيرة لتأكيد طلبك عبر واتساب.";
-
-    nextStep.textContent =
-      "سيتم فتح واتساب برسالة التسجيل الجاهزة. لا تنسَ الضغط على زر «إرسال» داخل واتساب لإتمام الطلب.";
-
-    button.href = whatsappURL;
-    button.target = "_self";
-    button.style.display = "flex";
-
-    countdownText.style.display = "block";
-    countdownNumber.textContent = secondsRemaining;
-
-    countdownTimer = window.setInterval(function () {
-      secondsRemaining--;
-
-      countdownNumber.textContent = secondsRemaining;
-
-      if (secondsRemaining <= 0) {
-        window.clearInterval(countdownTimer);
-        window.location.assign(whatsappURL);
-      }
-    }, 1000);
-
-    button.addEventListener("click", function () {
-      if (countdownTimer) {
-        window.clearInterval(countdownTimer);
-      }
-    });
-  }
-
-  async function saveOrder(order) {
-    if (isSaving) return;
-
-    isSaving = true;
-
-    button.style.display = "none";
-    countdownText.style.display = "none";
-
-    heading.textContent = "جارٍ تأكيد تسجيلك...";
-
-    messageElement.textContent =
-      "نقوم الآن بحفظ معلوماتك بأمان. يرجى الانتظار قليلاً.";
-
-    nextStep.textContent =
-      "لا تغلق هذه الصفحة حتى تنتهي عملية حفظ طلبك.";
-
-    try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(order)
-      });
-
-      let result;
-
-      try {
-        result = await response.json();
-      } catch (_) {
-        throw new Error("تعذر قراءة رد الخادم.");
-      }
-
-      if (!response.ok || !result.success) {
-        throw new Error(
-          result.message || "فشل حفظ الطلب."
-        );
-      }
-
-      // Mark the registration as saved.
-      sessionStorage.setItem(
-        "offreBacSavedOrder",
-        order.orderId
-      );
-
-      // Track a lead only after the server confirms saving.
-      if (typeof window.fbq === "function") {
-        window.fbq("track", "Lead");
-      }
-
-      const message =
-        "السلام عليكم، أريد التسجيل في عرض OFFRE BAC.\n\n" +
-        "الاسم الكامل: " + order.fullName + "\n" +
-        "رقم الهاتف: " + order.phone + "\n" +
-        "الشعبة: " + order.branch + "\n" +
-        "المستوى الدراسي: " + order.level + "\n" +
-        "العرض: خمس مواد - 799 DH\n\n" +
-        "رقم الطلب: " + order.orderId + "\n\n" +
-        "شكراً لكم.";
-
-      whatsappURL =
-        "https://wa.me/" + WHATSAPP_NUMBER +
-        "?text=" + encodeURIComponent(message);
-
-      startWhatsAppCountdown();
-
-    } catch (error) {
-      console.error("Order saving error:", error);
-
-      heading.textContent = "تعذر حفظ طلبك";
-
-      messageElement.textContent =
-        "لم نتمكن من حفظ معلوماتك حالياً. لا تقلق، معلوماتك ما زالت محفوظة في هذه الصفحة.";
-
-      nextStep.textContent =
-        "يرجى المحاولة مجدداً. لن يتم توجيهك إلى واتساب قبل نجاح الحفظ.";
-
-      showError(
-        "حدث خطأ أثناء حفظ الطلب. تحقق من اتصال الإنترنت وحاول مرة أخرى."
-      );
-
-      // Add retry button behavior.
-      button.textContent = "إعادة محاولة الحفظ";
-      button.href = "#";
-      button.style.display = "flex";
-
-      button.onclick = function (event) {
-        event.preventDefault();
-
-        if (!isSaving) {
-          saveOrder(order);
+          return /^\+[1-9][0-9]{7,14}$/.test(number)
+            ? number
+            : "";
         }
-      };
 
-    } finally {
-      isSaving = false;
-    }
-  }
+        const errorBox = document.getElementById("dataError");
+        const button = document.getElementById("whatsappButton");
+        const countdownText = document.getElementById("countdownText");
+        const countdownNumber = document.getElementById("countdownNumber");
 
-  // Read registration information from sessionStorage.
-  if (!orderId) {
-    showError(
-      "لم نعثر على رقم الطلب. ارجع إلى الموقع وأعد تعبئة الاستمارة."
-    );
-    return;
-  }
+        if (!validName || !validPhone || !validBranch) {
 
-  let order;
+          errorBox.style.display = "block";
+          countdownText.style.display = "none";
+          button.style.display = "none";
 
-  try {
-    order = JSON.parse(
-      sessionStorage.getItem(STORAGE_KEY) || "null"
-    );
-  } catch (_) {
-    order = null;
-  }
+          return;
+        }
 
-  if (
-    !order ||
-    order.orderId !== orderId ||
-    !order.fullName ||
-    !order.phone ||
-    !order.branch ||
-    !order.level
-  ) {
-    showError(
-      "لم نعثر على معلومات التسجيل الصحيحة. ارجع إلى الموقع وأعد تعبئة الاستمارة."
-    );
-    return;
-  }
+        const message =
+          "السلام عليكم، أريد التسجيل في عرض OFFRE BAC.\n\n" +
+          "الاسم الكامل: " + fullName + "\n" +
+          "رقم الهاتف: " + phone + "\n" +
+          "الشعبة: " + branch + "\n" +
+          "المستوى الدراسي: " + level + "\n" +
+          "العرض: خمس مواد - 799 DH\n\n" +
+          "شكراً لكم.";
 
-  const normalizedPhone = normalizePhoneNumber(order.phone);
+        const whatsappURL =
+          "https://wa.me/" + WHATSAPP_NUMBER +
+          "?text=" + encodeURIComponent(message);
 
-  const allowedBranches = [
-    "العلوم الفيزيائية",
-    "علوم الحياة والأرض",
-    "STE",
-    "STM",
-    "BAC LIBRE",
-    "BP"
-  ];
+        button.href = whatsappURL;
+        button.target = "_self";
 
-  if (
-    order.fullName.trim().length < 3 ||
-    !normalizedPhone ||
-    !allowedBranches.includes(order.branch) ||
-    order.level !== "الثانية باكالوريا"
-  ) {
-    showError(
-      "بعض معلومات التسجيل غير صحيحة. يرجى العودة إلى الموقع وإعادة التسجيل."
-    );
-    return;
-  }
+        let secondsRemaining = REDIRECT_DELAY_SECONDS;
 
-  order = {
-    orderId: order.orderId,
-    fullName: order.fullName.trim(),
-    phone: normalizedPhone,
-    branch: order.branch,
-    level: order.level
-  };
+        countdownNumber.textContent = secondsRemaining;
 
-  // If already saved, do not send it again.
-  const savedOrder = sessionStorage.getItem(
-    "offreBacSavedOrder"
-  );
+        const countdownTimer = window.setInterval(function () {
 
-  if (savedOrder === order.orderId) {
-    const message =
-      "السلام عليكم، أريد التسجيل في عرض OFFRE BAC.\n\n" +
-      "الاسم الكامل: " + order.fullName + "\n" +
-      "رقم الهاتف: " + order.phone + "\n" +
-      "الشعبة: " + order.branch + "\n" +
-      "المستوى الدراسي: " + order.level + "\n" +
-      "العرض: خمس مواد - 799 DH\n\n" +
-      "رقم الطلب: " + order.orderId + "\n\n" +
-      "شكراً لكم.";
+          secondsRemaining -= 1;
 
-    whatsappURL =
-      "https://wa.me/" + WHATSAPP_NUMBER +
-      "?text=" + encodeURIComponent(message);
+          countdownNumber.textContent = secondsRemaining;
 
-    startWhatsAppCountdown();
-    return;
-  }
+          if (secondsRemaining <= 0) {
 
-  saveOrder(order);
+            window.clearInterval(countdownTimer);
 
-})();
-</script>
+            window.location.assign(whatsappURL);
+          }
 
+        }, 1000);
+
+        button.addEventListener("click", function () {
+
+          window.clearInterval(countdownTimer);
+
+        });
+
+      })();
+    </script>
 
 </body>
 </html>
