@@ -3035,13 +3035,7 @@ a,button,input,select{touch-action:manipulation}
       // International format for Morocco: +212 663 271 459
       const WHATSAPP_NUMBER = "212663271459";
 
-    registrationForm.addEventListener("submit", function (event) {
-
-  const thankYouURL = new URL("tankupage.html", window.location.href);
-  thankYouURL.searchParams.set("orderId", orderId);
-
-  window.location.assign(thankYouURL.toString());
-});
+      registrationForm.addEventListener("submit", function (event) {
         event.preventDefault();
 
         formMessage.style.display = "none";
@@ -3246,4 +3240,3 @@ if (typeof window.fbq === "function") {
 
 </body>
 </html>
- 
