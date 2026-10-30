@@ -7,6 +7,7 @@
     <title>شكراً على تسجيلك | OFFRE BAC</title>
     <style>
       * { box-sizing: border-box; }
+
       body {
         min-height: 100vh;
         margin: 0;
@@ -21,6 +22,7 @@
         font-family: "Tajawal", "Cairo", Tahoma, Arial, sans-serif;
         line-height: 1.9;
       }
+
       .thankyou-card {
         width: min(100%, 540px);
         padding: clamp(28px, 6vw, 48px);
@@ -31,6 +33,7 @@
         text-align: center;
         animation: card-in .45s ease-out both;
       }
+
       .check {
         width: 92px;
         height: 92px;
@@ -46,18 +49,21 @@
         line-height: 1;
         animation: check-in .5s .1s ease-out both;
       }
+
       h1 {
         margin: 0 0 12px;
         color: #14213d;
         font-size: clamp(26px, 5vw, 34px);
         line-height: 1.5;
       }
+
       .lead {
         margin: 0 auto;
         max-width: 420px;
         color: #64748b;
         font-size: 15px;
       }
+
       .next-step {
         margin: 25px 0 0;
         padding: 16px 18px;
@@ -68,11 +74,13 @@
         font-size: 14px;
         font-weight: 700;
       }
+
       .countdown {
         margin: 18px 0 0;
         color: #64748b;
         font-size: 13px;
       }
+
       #countdownNumber {
         display: inline-block;
         min-width: 2ch;
@@ -81,11 +89,13 @@
         font-weight: 900;
         font-variant-numeric: tabular-nums;
       }
+
       .actions {
         display: grid;
         gap: 11px;
         margin-top: 24px;
       }
+
       .button {
         min-height: 52px;
         padding: 12px 20px;
@@ -103,13 +113,19 @@
         cursor: pointer;
         transition: transform .2s ease, background .2s ease;
       }
-      .button:hover { background: #293bbd; transform: translateY(-2px); }
+
+      .button:hover {
+        background: #293bbd;
+        transform: translateY(-2px);
+      }
+
       .back-link {
         color: #64748b;
         font-size: 12px;
         text-decoration: underline;
         text-underline-offset: 4px;
       }
+
       .error {
         display: none;
         margin-top: 18px;
@@ -120,66 +136,110 @@
         color: #934e32;
         font-size: 13px;
       }
-      @keyframes card-in {
-        from { opacity: 0; transform: translateY(14px) scale(.98); }
-        to { opacity: 1; transform: translateY(0) scale(1); }
-      }
-      @keyframes check-in {
-        from { opacity: 0; transform: scale(.55); }
-        to { opacity: 1; transform: scale(1); }
-      }
-      @media (prefers-reduced-motion: reduce) {
-        *, *::before, *::after { animation: none !important; transition: none !important; }
-      }
-    
-/* Visual-only refinement; countdown and WhatsApp logic are unchanged. */
-body {
-  background:
-    radial-gradient(ellipse at 8% 8%, rgba(185,243,107,.20), transparent 34rem),
-    radial-gradient(ellipse at 96% 88%, rgba(53,72,212,.12), transparent 32rem),
-    #f3f6fb;
-}
-.thankyou-card {
-  position: relative;
-  overflow: hidden;
-  border-color: rgba(203,213,225,.72);
-  border-radius: 30px;
-  box-shadow: 0 30px 90px rgba(15,23,42,.13);
-}
-.thankyou-card::before {
-  content: "";
-  position: absolute;
-  top: 0; right: 0; left: 0;
-  height: 5px;
-  background: linear-gradient(90deg,#b9f36b,#3548d4);
-}
-.check {
-  box-shadow: 0 12px 28px rgba(22,128,74,.10);
-}
-.next-step {
-  border-color: #dcebd4;
-  border-radius: 18px;
-  line-height: 1.9;
-}
-.button {
-  border-radius: 15px;
-  box-shadow: 0 12px 24px rgba(53,72,212,.22);
-}
-.button:active { transform: translateY(0) scale(.99); }
-.back-link { display: inline-block; padding: 8px; }
-.error { border-color: #f1d2c5; }
-@media (max-width: 480px) {
-  body { padding: 16px; }
-  .thankyou-card { border-radius: 24px; }
-  .check { width: 82px; height: 82px; font-size: 48px; }
-}
 
-</style>
+      @keyframes card-in {
+        from {
+          opacity: 0;
+          transform: translateY(14px) scale(.98);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      @keyframes check-in {
+        from {
+          opacity: 0;
+          transform: scale(.55);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+
+      /* تحسينات التصميم */
+      body {
+        background:
+          radial-gradient(ellipse at 8% 8%, rgba(185,243,107,.20), transparent 34rem),
+          radial-gradient(ellipse at 96% 88%, rgba(53,72,212,.12), transparent 32rem),
+          #f3f6fb;
+      }
+
+      .thankyou-card {
+        position: relative;
+        overflow: hidden;
+        border-color: rgba(203,213,225,.72);
+        border-radius: 30px;
+        box-shadow: 0 30px 90px rgba(15,23,42,.13);
+      }
+
+      .thankyou-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        height: 5px;
+        background: linear-gradient(90deg,#b9f36b,#3548d4);
+      }
+
+      .check {
+        box-shadow: 0 12px 28px rgba(22,128,74,.10);
+      }
+
+      .next-step {
+        border-color: #dcebd4;
+        border-radius: 18px;
+        line-height: 1.9;
+      }
+
+      .button {
+        border-radius: 15px;
+        box-shadow: 0 12px 24px rgba(53,72,212,.22);
+      }
+
+      .button:active {
+        transform: translateY(0) scale(.99);
+      }
+
+      .back-link {
+        display: inline-block;
+        padding: 8px;
+      }
+
+      .error {
+        border-color: #f1d2c5;
+      }
+
+      @media (max-width: 480px) {
+        body { padding: 16px; }
+        .thankyou-card { border-radius: 24px; }
+        .check {
+          width: 82px;
+          height: 82px;
+          font-size: 48px;
+        }
+      }
+    </style>
 </head>
+
 <body>
+
     <main class="thankyou-card">
+
       <div class="check" aria-hidden="true">✓</div>
+
       <h1>تم تسجيل طلبك بنجاح!</h1>
+
       <p class="lead" id="thankyouMessage">
         شكراً لثقتك بنا. بقيت خطوة أخيرة لإكمال التسجيل: تأكيد إرسال معلوماتك عبر واتساب.
       </p>
@@ -189,17 +249,25 @@ body {
       </div>
 
       <p class="countdown" id="countdownText">
-        سيتم توجيهك إلى واتساب خلال <span id="countdownNumber">30</span> ثانية.
+        سيتم توجيهك إلى واتساب خلال
+        <span id="countdownNumber">30</span>
+        ثانية.
       </p>
 
       <div class="actions">
-        <a class="button" id="whatsappButton" href="#">فتح واتساب الآن</a>
-        <a class="back-link" href="index.html">العودة إلى الموقع</a>
+        <a class="button" id="whatsappButton" href="#">
+          فتح واتساب الآن
+        </a>
+
+        <a class="back-link" href="index.html">
+          العودة إلى الموقع
+        </a>
       </div>
 
       <div class="error" id="dataError" role="alert">
         لم نعثر على بيانات التسجيل. ارجع إلى الموقع وأعد تعبئة الاستمارة من فضلك.
       </div>
+
     </main>
 
     <script>
@@ -208,6 +276,7 @@ body {
 
         const WHATSAPP_NUMBER = "212663271459";
         const REDIRECT_DELAY_SECONDS = 30;
+
         const params = new URLSearchParams(window.location.search);
 
         const fullName = (params.get("fullName") || "").trim();
@@ -216,13 +285,16 @@ body {
         const level = (params.get("level") || "الثانية باكالوريا").trim();
 
         const normalizedPhone = normalizePhoneNumber(phone);
+
         const validName = fullName.length >= 3;
         const validPhone = Boolean(normalizedPhone);
+
         const validBranch =
           branch === "العلوم الفيزيائية" ||
           branch === "علوم الحياة والأرض";
 
         function normalizePhoneNumber(value) {
+
           const digitMap = {
             "٠":"0", "١":"1", "٢":"2", "٣":"3", "٤":"4",
             "٥":"5", "٦":"6", "٧":"7", "٨":"8", "٩":"9",
@@ -230,17 +302,35 @@ body {
             "۵":"5", "۶":"6", "۷":"7", "۸":"8", "۹":"9"
           };
 
-          let number = String(value || "").replace(/[٠-٩۰-۹]/g, digit => digitMap[digit]);
+          let number = String(value || "").replace(
+            /[٠-٩۰-۹]/g,
+            digit => digitMap[digit]
+          );
+
           number = number.replace(/[\s().-]/g, "");
-          if (number.startsWith("00")) number = "+" + number.slice(2);
-          if (number.startsWith("0") && /^0[5-7][0-9]{8}$/.test(number)) {
+
+          if (number.startsWith("00")) {
+            number = "+" + number.slice(2);
+          }
+
+          if (
+            number.startsWith("0") &&
+            /^0[5-7][0-9]{8}$/.test(number)
+          ) {
             number = "+212" + number.slice(1);
+
           } else if (/^[5-7][0-9]{8}$/.test(number)) {
+
             number = "+212" + number;
+
           } else if (/^212[5-7][0-9]{8}$/.test(number)) {
+
             number = "+" + number;
           }
-          return /^\+[1-9][0-9]{7,14}$/.test(number) ? number : "";
+
+          return /^\+[1-9][0-9]{7,14}$/.test(number)
+            ? number
+            : "";
         }
 
         const errorBox = document.getElementById("dataError");
@@ -249,9 +339,11 @@ body {
         const countdownNumber = document.getElementById("countdownNumber");
 
         if (!validName || !validPhone || !validBranch) {
+
           errorBox.style.display = "block";
           countdownText.style.display = "none";
           button.style.display = "none";
+
           return;
         }
 
@@ -265,29 +357,39 @@ body {
           "شكراً لكم.";
 
         const whatsappURL =
-          "https\://wa.me/" + WHATSAPP_NUMBER +
+          "https://wa.me/" + WHATSAPP_NUMBER +
           "?text=" + encodeURIComponent(message);
 
         button.href = whatsappURL;
         button.target = "_self";
 
         let secondsRemaining = REDIRECT_DELAY_SECONDS;
+
         countdownNumber.textContent = secondsRemaining;
 
         const countdownTimer = window.setInterval(function () {
+
           secondsRemaining -= 1;
+
           countdownNumber.textContent = secondsRemaining;
 
           if (secondsRemaining <= 0) {
+
             window.clearInterval(countdownTimer);
+
             window.location.assign(whatsappURL);
           }
+
         }, 1000);
 
         button.addEventListener("click", function () {
+
           window.clearInterval(countdownTimer);
+
         });
+
       })();
     </script>
+
 </body>
 </html>
