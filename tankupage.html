@@ -85,18 +85,13 @@ h1{margin:0 0 14px;color:var(--navy);font-size:clamp(25px,5vw,34px);font-weight:
 
         const validName = fullName.length >= 3;
         const validPhone = Boolean(normalizedPhone);
-
         const validBranch =
-          branch === "العلوم الفيزيائية" ||
-          branch === "علوم الحياة والأرض"
-                      branch === "STE"
-                          branch === "STM"
-branch === "BAC LIBRE"
-            branch === "BP"
-            
-        
-            
-            ;
+        branch === "العلوم الفيزيائية" ||
+    branch === "علوم الحياة والأرض" ||
+    branch === "STE" ||
+    branch === "STM" ||
+    branch === "BAC LIBRE" ||
+    branch === "BP";
 
         function normalizePhoneNumber(value) {
 
