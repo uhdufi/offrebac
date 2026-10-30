@@ -2595,16 +2595,28 @@
                 </div>
 
                 <div class="field full">
-                  <label for="branch">الشعبة</label>
-                  <select id="branch" name="branch" required>
-                    <option value="">اختر شعبتك</option>
-                    <option value="العلوم الفيزيائية">
-                      العلوم الفيزيائية
-                    </option>
-                    <option value="علوم الحياة والأرض">
-                      علوم الحياة والأرض
-                    </option>
-                  </select>
+  <label for="branch">الشعبة</label>
+  <select id="branch" name="branch" required>
+    <option value="">اختر شعبتك</option>
+
+    <option value="العلوم الفيزيائية">
+      العلوم الفيزيائية
+    </option>
+
+    <option value="علوم الحياة والأرض">
+      علوم الحياة والأرض
+    </option>
+
+    <option value="STE">STE</option>
+
+    <option value="STM">STM</option>
+
+    <option value="BAC LIBRE">BAC LIBRE</option>
+
+    <option value="BP">BP</option>
+
+  </select>
+</div>
                 </div>
               </div>
 
@@ -2710,13 +2722,19 @@
           return;
         }
 
-        if (
-          branch !== "العلوم الفيزيائية" &&
-          branch !== "علوم الحياة والأرض"
-        ) {
-          showFormError("يرجى اختيار الشعبة.");
-          return;
-        }
+        const allowedBranches = [
+  "العلوم الفيزيائية",
+  "علوم الحياة والأرض",
+  "STE",
+  "STM",
+  "BAC LIBRE",
+  "BP"
+];
+
+if (!allowedBranches.includes(branch)) {
+  showFormError("يرجى اختيار الشعبة.");
+  return;
+}
 
         if (level !== "الثانية باكالوريا") {
           showFormError("يرجى اختيار المستوى الدراسي.");
