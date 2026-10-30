@@ -2728,36 +2728,15 @@ if (typeof window.fbq === "function") {
   });
 }
 
-      const whatsappURL =
-        "https://wa.me/" + WHATSAPP_NUMBER +
-        "?text=" + encodeURIComponent(message);
+      // Move to the separate thank-you page and pass the validated details.
+      // The thank-you page will prepare the WhatsApp message and open it after 30 seconds.
+      const thankYouURL = new URL("thankupage.html", window.location.href);
+      thankYouURL.searchParams.set("fullName", fullName);
+      thankYouURL.searchParams.set("phone", phone);
+      thankYouURL.searchParams.set("branch", branch);
+      thankYouURL.searchParams.set("level", level);
 
-      // Open WhatsApp with the prepared message.
-      const whatsappWindow = window.open(
-        whatsappURL,
-        "_blank",
-        "noopener,noreferrer"
-      );
-
-      // If the browser blocks the new tab, offer a clickable link.
-      if (!whatsappWindow) {
-        showFormError(
-          "تعذر فتح واتساب تلقائياً. اضغط على الرابط أدناه للمتابعة."
-        );
-
-        const fallbackLink = document.createElement("a");
-        fallbackLink.href = whatsappURL;
-        fallbackLink.target = "_blank";
-        fallbackLink.rel = "noopener noreferrer";
-        fallbackLink.textContent = "فتح واتساب وإكمال التسجيل";
-        fallbackLink.style.display = "inline-block";
-        fallbackLink.style.marginTop = "8px";
-        fallbackLink.style.fontWeight = "bold";
-        fallbackLink.style.textDecoration = "underline";
-
-        formMessage.appendChild(document.createElement("br"));
-        formMessage.appendChild(fallbackLink);
-      }
+      window.location.assign(thankYouURL.toString());
     });
 
     function showFormError(message) {
@@ -2790,111 +2769,6 @@ if (typeof window.fbq === "function") {
     });
   </script>
 
-
-  <!-- Registration success confirmation (added without changing existing code) -->
-  <style>
-    #registrationSuccessOverlay {
-      position: fixed;
-      inset: 0;
-      z-index: 99999;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      background: rgba(23, 30, 44, .58);
-      backdrop-filter: blur(7px);
-    }
-    #registrationSuccessOverlay .success-card {
-      width: min(100%, 420px);
-      padding: 34px 26px;
-      border-radius: 24px;
-      background: #fff;
-      text-align: center;
-      box-shadow: 0 24px 80px rgba(0,0,0,.2);
-      animation: registrationSuccessIn .35s ease-out both;
-      font-family: Tahoma, Arial, sans-serif;
-      direction: rtl;
-    }
-    #registrationSuccessOverlay .success-check {
-      width: 82px;
-      height: 82px;
-      margin: 0 auto 20px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: #e8f8ef;
-      color: #16804a;
-      border: 3px solid #b8e9cb;
-      font-size: 48px;
-      font-weight: 800;
-      line-height: 1;
-      animation: registrationCheckPop .45s .1s ease-out both;
-    }
-    #registrationSuccessOverlay h2 {
-      margin: 0 0 12px;
-      color: #20232d;
-      font-size: 25px;
-      line-height: 1.5;
-    }
-    #registrationSuccessOverlay p {
-      margin: 0;
-      color: #70809d;
-      font-size: 15px;
-      line-height: 1.9;
-    }
-    #registrationSuccessOverlay .success-small {
-      margin-top: 16px;
-      color: #16804a;
-      font-size: 12px;
-      font-weight: 700;
-    }
-    @keyframes registrationSuccessIn {
-      from { opacity: 0; transform: translateY(12px) scale(.97); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-    @keyframes registrationCheckPop {
-      from { opacity: 0; transform: scale(.5); }
-      to { opacity: 1; transform: scale(1); }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      #registrationSuccessOverlay .success-card,
-      #registrationSuccessOverlay .success-check {
-        animation: none;
-      }
-    }
-  </style>
-  <div id="registrationSuccessOverlay" role="status" aria-live="polite">
-    <div class="success-card">
-      <div class="success-check" aria-hidden="true">✓</div>
-      <h2>تم التسجيل بنجاح!</h2>
-      <p>شكراً لثقتك بنا. الآن أكمل خطوات التسجيل عبر واتساب وتأكد من إرسال معلوماتك.</p>
-      <div class="success-small">سيتم فتح واتساب خلال لحظات...</div>
-    </div>
-  </div>
-  <script>
-    (function () {
-      const successOverlay = document.getElementById("registrationSuccessOverlay");
-      const originalSubmit = document.getElementById("registrationForm");
-      if (!successOverlay || !originalSubmit) return;
-
-      originalSubmit.addEventListener("submit", function () {
-        if (!originalSubmit.checkValidity()) return;
-
-        const fullName = document.getElementById("fullName").value.trim();
-        const phone = document.getElementById("phone").value.trim();
-        const branch = document.getElementById("branch").value;
-        const normalizedPhone = phone.replace(/[\s().-]/g, "");
-        if (fullName.length < 3 ||
-            !/^\+?[0-9]{9,15}$/.test(normalizedPhone) ||
-            (branch !== "العلوم الفيزيائية" && branch !== "علوم الحياة والأرض")) return;
-
-        successOverlay.style.display = "flex";
-        window.setTimeout(function () {
-          successOverlay.style.display = "none";
-        }, 30000);
-      }, true);
-    })();
-  </script>
 
   <style id="compact-timetable-refinement">
     /* Compact, consistent weekly timetable — visual-only refinement */
