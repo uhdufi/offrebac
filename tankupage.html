@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#101b36">
+    <title>شكراً على تسجيلك | OFFRE BAC</title>
+    <style>
+:root{--navy:#101b36;--navy2:#172747;--blue:#4268f5;--cyan:#65d9e8;--ink:#15213b;--muted:#68748b;--paper:#f5f7fc;--line:#e6eaf2;--white:#fff}
+*{box-sizing:border-box}html{min-height:100%;font-family:"Tajawal",sans-serif}
+body{min-height:100vh;margin:0;padding:24px;display:grid;place-items:center;background:radial-gradient(ellipse at 15% 12%,rgba(66,104,245,.24),transparent 34%),radial-gradient(ellipse at 88% 86%,rgba(101,217,232,.15),transparent 32%),linear-gradient(135deg,#0b1429,#101b36 58%,#172747);color:var(--ink);font-family:"Tajawal",sans-serif}
+.thankyou-card{width:min(100%,560px);position:relative;overflow:hidden;background:#fff;border:1px solid rgba(255,255,255,.5);border-radius:28px;padding:clamp(28px,5vw,48px);text-align:center;box-shadow:0 30px 90px rgba(0,0,0,.28);animation:card-in .55s ease both}
+.thankyou-card:before{content:"";position:absolute;inset:0 0 auto;height:6px;background:linear-gradient(90deg,var(--blue),var(--cyan))}
+.check{width:88px;height:88px;margin:0 auto 22px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(145deg,#e7faff,#eaf0ff);color:var(--blue);font-size:52px;font-weight:900;box-shadow:0 10px 25px rgba(66,104,245,.12);animation:check-in .65s .12s ease both}
+h1{margin:0 0 14px;color:var(--navy);font-size:clamp(25px,5vw,34px);font-weight:900;line-height:1.4}
+.lead{margin:0 auto 20px;max-width:440px;color:var(--muted);font-size:16px;line-height:2}
+.next-step{margin:20px 0;padding:17px 18px;border:1px solid #dce7fb;border-radius:15px;background:#f3f7ff;color:#344768;font-size:14px;line-height:1.9}
+.countdown{margin:18px 0;color:#77849b;font-size:14px}
+#countdownNumber{display:inline-grid;min-width:30px;place-items:center;margin:0 4px;color:var(--blue);font-weight:900;font-size:20px;font-variant-numeric:tabular-nums}
+.actions{display:grid;gap:12px;margin-top:24px}
+.button{display:flex;min-height:54px;align-items:center;justify-content:center;padding:13px 20px;border-radius:13px;background:linear-gradient(135deg,var(--blue),#3152d9);color:#fff;text-decoration:none;font-weight:900;box-shadow:0 10px 23px rgba(66,104,245,.22);transition:transform .2s ease,box-shadow .2s ease}
+.button:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(66,104,245,.28)}
+.back-link{display:inline-block;padding:10px;color:#53627b;text-decoration:none;font-size:14px;font-weight:700}.back-link:hover{color:var(--blue)}
+.error{display:none;margin-top:20px;padding:14px;border:1px solid #f0caca;border-radius:12px;background:#fff5f5;color:#a12b35;font-size:14px;line-height:1.8}
+@keyframes card-in{from{opacity:0;transform:translateY(16px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes check-in{from{opacity:0;transform:scale(.55)}to{opacity:1;transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+@media(max-width:480px){body{padding:15px}.thankyou-card{border-radius:22px;padding:28px 20px}.check{width:78px;height:78px;font-size:46px}}
+</style>
+</head>
+
+<body>
+
+    <main class="thankyou-card">
+
+      <div class="check" aria-hidden="true">✓</div>
+
+      <h1>تم تسجيل طلبك بنجاح!</h1>
+
+      <p class="lead" id="thankyouMessage">
+        شكراً لثقتك بنا. بقيت خطوة أخيرة لإكمال التسجيل: تأكيد إرسال معلوماتك عبر واتساب.
+      </p>
+
+      <div class="next-step">
+        سيتم فتح واتساب برسالة التسجيل الجاهزة. لا تنسَ الضغط على زر «إرسال» داخل واتساب لإتمام الطلب.
+      </div>
+
+      <p class="countdown" id="countdownText">
+        سيتم توجيهك إلى واتساب خلال
+        <span id="countdownNumber">30</span>
+        ثانية.
+      </p>
+
+      <div class="actions">
+        <a class="button" id="whatsappButton" href="#">
+          فتح واتساب الآن
+        </a>
+
+        <a class="back-link" href="index.html">
+          العودة إلى الموقع
+        </a>
+      </div>
+
+      <div class="error" id="dataError" role="alert">
+        لم نعثر على بيانات التسجيل. ارجع إلى الموقع وأعد تعبئة الاستمارة من فضلك.
+      </div>
+
+    </main>
+
+    <script>
+      (function () {
+        "use strict";
+
+        const WHATSAPP_NUMBER = "212663271459";
+        const REDIRECT_DELAY_SECONDS = 10;
+
+        const params = new URLSearchParams(window.location.search);
+
+        const fullName = (params.get("fullName") || "").trim();
+        const phone = (params.get("phone") || "").trim();
+        const branch = (params.get("branch") || "").trim();
+        const level = (params.get("level") || "الثانية باكالوريا").trim();
+
+        const normalizedPhone = normalizePhoneNumber(phone);
+
+        const validName = fullName.length >= 3;
+        const validPhone = Boolean(normalizedPhone);
+
+        const validBranch =
+          branch === "العلوم الفيزيائية" ||
+          branch === "علوم الحياة والأرض"
+                      branch === "STE"
+                          branch === "STM"
+branch === "BAC LIBRE"
+            branch === "BP"
+            
+        
+            
+            ;
+
+        function normalizePhoneNumber(value) {
+
+          const digitMap = {
+            "٠":"0", "١":"1", "٢":"2", "٣":"3", "٤":"4",
+            "٥":"5", "٦":"6", "٧":"7", "٨":"8", "٩":"9",
+            "۰":"0", "۱":"1", "۲":"2", "۳":"3", "۴":"4",
+            "۵":"5", "۶":"6", "۷":"7", "۸":"8", "۹":"9"
+          };
+
+          let number = String(value || "").replace(
+            /[٠-٩۰-۹]/g,
+            digit => digitMap[digit]
+          );
+
+          number = number.replace(/[\s().-]/g, "");
+
+          if (number.startsWith("00")) {
+            number = "+" + number.slice(2);
+          }
+
+          if (
+            number.startsWith("0") &&
+            /^0[5-7][0-9]{8}$/.test(number)
+          ) {
+            number = "+212" + number.slice(1);
+
+          } else if (/^[5-7][0-9]{8}$/.test(number)) {
+
+            number = "+212" + number;
+
+          } else if (/^212[5-7][0-9]{8}$/.test(number)) {
+
+            number = "+" + number;
+          }
+
+          return /^\+[1-9][0-9]{7,14}$/.test(number)
+            ? number
+            : "";
+        }
+
+        const errorBox = document.getElementById("dataError");
+        const button = document.getElementById("whatsappButton");
+        const countdownText = document.getElementById("countdownText");
+        const countdownNumber = document.getElementById("countdownNumber");
+
+        if (!validName || !validPhone || !validBranch) {
+
+          errorBox.style.display = "block";
+          countdownText.style.display = "none";
+          button.style.display = "none";
+
+          return;
+        }
+
+        const message =
+          "السلام عليكم، أريد التسجيل في عرض OFFRE BAC.\n\n" +
+          "الاسم الكامل: " + fullName + "\n" +
+          "رقم الهاتف: " + phone + "\n" +
+          "الشعبة: " + branch + "\n" +
+          "المستوى الدراسي: " + level + "\n" +
+          "العرض: خمس مواد - 799 DH\n\n" +
+          "شكراً لكم.";
+
+        const whatsappURL =
+          "https://wa.me/" + WHATSAPP_NUMBER +
+          "?text=" + encodeURIComponent(message);
+
+        button.href = whatsappURL;
+        button.target = "_self";
+
+        let secondsRemaining = REDIRECT_DELAY_SECONDS;
+
+        countdownNumber.textContent = secondsRemaining;
+
+        const countdownTimer = window.setInterval(function () {
+
+          secondsRemaining -= 1;
+
+          countdownNumber.textContent = secondsRemaining;
+
+          if (secondsRemaining <= 0) {
+
+            window.clearInterval(countdownTimer);
+
+            window.location.assign(whatsappURL);
+          }
+
+        }, 1000);
+
+        button.addEventListener("click", function () {
+
+          window.clearInterval(countdownTimer);
+
+        });
+
+      })();
+    </script>
+
+</body>
+</html>
