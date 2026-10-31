@@ -2479,6 +2479,15 @@ body {
 }
 
 </style>
+    <!-- Supabase client: public publishable key (safe for browser use with RLS) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+      const supabaseClient = window.supabase.createClient(
+        "https://yzectimipxgekzlkjkoo.supabase.co",
+        "sb_publishable_V5nUCWgydWDKr2mAHmHG2A_dZIYFYIF"
+      );
+    </script>
+
 </head>
 <body>
 
@@ -3324,15 +3333,6 @@ body {
       </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script>
-      // Supabase connection for OFFRE BAC
-      const supabaseClient = window.supabase.createClient(
-        "https://yzectimipxgekzlkjkoo.supabase.co",
-        "sb_publishable_V5nUCWgydWDKr2mAHmHG2A_dZIYFYIF"
-      );
-    </script>
-
     <script>
       "use strict";
 
@@ -3414,58 +3414,57 @@ if (!allowedBranches.includes(branch)) {
           "شكراً لكم.";
 
         // Save the registration in Supabase before redirecting.
+        // Phone is stored as text to preserve the complete international number.
         const registration = {
           full_name: fullName,
           phone: normalizedPhone,
           branch: branch,
           level: level,
           offer: "OFFRE BAC - خمس مواد",
-          price: 799,
-          status: "registered"
+          price: 799
         };
 
         const submitButton = registrationForm.querySelector(
           'button[type="submit"]'
         );
-
+        const originalButtonHTML = submitButton.innerHTML;
         submitButton.disabled = true;
         submitButton.textContent = "جارٍ حفظ التسجيل...";
 
+        let saveError = null;
         try {
           const { error } = await supabaseClient
             .from("offre_bac_registrations")
             .insert([registration]);
-
-          if (error) {
-            throw error;
-          }
-
-          // Track the registration only after Supabase confirms the insert.
-          if (typeof window.fbq === "function") {
-            window.fbq("track", "Purchase", {
-              value: 799,
-              currency: "MAD"
-            });
-          }
-
-          // Keep the existing thank-you page and its URL parameters.
-          const thankYouURL = new URL("tankupage.html", window.location.href);
-          thankYouURL.searchParams.set("fullName", fullName);
-          thankYouURL.searchParams.set("phone", normalizedPhone);
-          thankYouURL.searchParams.set("branch", branch);
-          thankYouURL.searchParams.set("level", level);
-
-          window.location.assign(thankYouURL.toString());
-        } catch (error) {
-          console.error("Supabase registration error:", error);
-          showFormError(
-            "تعذر حفظ التسجيل حالياً. المرجو المحاولة مرة أخرى."
-          );
-
-          submitButton.disabled = false;
-          submitButton.innerHTML =
-            'تأكيد طلب التسجيل <span aria-hidden="true">↗</span>';
+          saveError = error;
+        } catch (networkError) {
+          saveError = networkError;
         }
+
+        if (saveError) {
+          console.error("Supabase registration error:", saveError);
+          showFormError("تعذر حفظ التسجيل حالياً. المرجو المحاولة مرة أخرى.");
+          submitButton.disabled = false;
+          submitButton.innerHTML = originalButtonHTML;
+          return;
+        }
+
+        // Track a successfully saved registration.
+        if (typeof window.fbq === "function") {
+          window.fbq("track", "Purchase", {
+            value: 799,
+            currency: "MAD"
+          });
+        }
+
+        // Keep the existing thank-you page and WhatsApp flow unchanged.
+        const thankYouURL = new URL("tankupage.html", window.location.href);
+        thankYouURL.searchParams.set("fullName", fullName);
+        thankYouURL.searchParams.set("phone", phone);
+        thankYouURL.searchParams.set("branch", branch);
+        thankYouURL.searchParams.set("level", level);
+
+        window.location.assign(thankYouURL.toString());
       });
 
       function normalizePhoneNumber(value) {
@@ -3588,3 +3587,4 @@ if (!allowedBranches.includes(branch)) {
 
 </body>
 </html>
+            
