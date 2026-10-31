@@ -2482,10 +2482,15 @@ body {
     <!-- Supabase client: public publishable key (safe for browser use with RLS) -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-      const supabaseClient = window.supabase.createClient(
-        "https://yzectimipxgekzlkjkoo.supabase.co",
-        "sb_publishable_V5nUCWgydWDKr2mAHmHG2A_dZIYFYIF"
-      );
+      let supabaseClient = null;
+      if (window.supabase && typeof window.supabase.createClient === "function") {
+        supabaseClient = window.supabase.createClient(
+          "https://yzectimipxgekzlkjkoo.supabase.co",
+          "sb_publishable_V5nUCWgydWDKr2mAHmHG2A_dZIYFYIF"
+        );
+      } else {
+        console.error("Supabase SDK did not load. Check the network or CDN.");
+      }
     </script>
 
 </head>
@@ -2803,79 +2808,47 @@ body {
               أدخل معلوماتك لإعداد رسالة التسجيل.
             </p>
 
-            <form id="registrationForm">
-
+            <form id="registrationForm" novalidate>
               <div class="form-grid">
-
                 <div class="field full">
                   <label for="fullName">الاسم الكامل</label>
-                  <input
-                    type="text"
-                    id="fullName"
-                    name="fullName"
-                    placeholder="أدخل اسمك الكامل"
-                    autocomplete="name"
-                    minlength="3"
-                    maxlength="100"
-                    required>
+                  <input type="text" id="fullName" name="fullName"
+                    placeholder="أدخل اسمك الكامل" autocomplete="name"
+                    minlength="3" maxlength="100" required>
                 </div>
 
                 <div class="field full">
                   <label for="phone">رقم الهاتف</label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    placeholder="مثال: 0612345678"
-                    autocomplete="tel"
-                    inputmode="tel"
-                    maxlength="20"
-                    required>
+                  <input type="tel" id="phone" name="phone"
+                    placeholder="مثال: 0612345678" autocomplete="tel"
+                    inputmode="tel" maxlength="20" required>
                 </div>
 
                 <div class="field full">
-  <label for="branch">الشعبة</label>
-  <select id="branch" name="branch" required>
-    <option value="">اختر شعبتك</option>
-
-    <option value="العلوم الفيزيائية">
-      العلوم الفيزيائية
-    </option>
-
-    <option value="علوم الحياة والأرض">
-      علوم الحياة والأرض
-    </option>
-
-    <option value="STE">STE</option>
-
-    <option value="STM">STM</option>
-
-    <option value="BAC LIBRE">BAC LIBRE</option>
-
-    <option value="BP">BP</option>
-
-  </select>
-</div>
+                  <label for="branch">الشعبة</label>
+                  <select id="branch" name="branch" required>
+                    <option value="">اختر شعبتك</option>
+                    <option value="العلوم الفيزيائية">العلوم الفيزيائية</option>
+                    <option value="علوم الحياة والأرض">علوم الحياة والأرض</option>
+                    <option value="STE">STE</option>
+                    <option value="STM">STM</option>
+                    <option value="BAC LIBRE">BAC LIBRE</option>
+                    <option value="BP">BP</option>
+                  </select>
                 </div>
               </div>
 
-              <button type="submit" class="btn form-submit">
+              <button type="submit" id="registrationSubmit" class="btn form-submit">
                 تأكيد طلب التسجيل
                 <span aria-hidden="true">↗</span>
               </button>
 
-              <div
-                class="form-message"
-                id="formMessage"
-                role="alert"
-                aria-live="polite">
-              </div>
+              <div class="form-message" id="formMessage" role="alert" aria-live="polite"></div>
 
               <p class="form-privacy">
                 سيُفتح واتساب لإرسال الرسالة. لن يتم إرسال البيانات تلقائياً
                 قبل تأكيد الإرسال من داخل واتساب.
               </p>
-
             </form>
           </div>
 
@@ -3431,6 +3404,13 @@ if (!allowedBranches.includes(branch)) {
         submitButton.disabled = true;
         submitButton.textContent = "جارٍ حفظ التسجيل...";
 
+        if (!supabaseClient) {
+          showFormError("تعذر الاتصال بخدمة التسجيل. تحقق من اتصال الإنترنت ثم أعد المحاولة.");
+          submitButton.disabled = false;
+          submitButton.innerHTML = originalButtonHTML;
+          return;
+        }
+
         let saveError = null;
         try {
           const { error } = await supabaseClient
@@ -3443,7 +3423,7 @@ if (!allowedBranches.includes(branch)) {
 
         if (saveError) {
           console.error("Supabase registration error:", saveError);
-          showFormError("تعذر حفظ التسجيل حالياً. المرجو المحاولة مرة أخرى.");
+          showFormError("تعذر حفظ التسجيل حالياً. تحقق من الاتصال ثم أعد المحاولة.");
           submitButton.disabled = false;
           submitButton.innerHTML = originalButtonHTML;
           return;
@@ -3587,4 +3567,3 @@ if (!allowedBranches.includes(branch)) {
 
 </body>
 </html>
-            
