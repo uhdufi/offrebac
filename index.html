@@ -2493,7 +2493,7 @@ body {
       }
     </script>
 
-</head>
+<style>.old-price{display:inline-block;color:#9caac0;font-size:23px;text-decoration-thickness:2px;margin:0 8px}.offer-clock{margin:24px auto;padding:24px 18px;max-width:680px;text-align:center;border:2px solid #65d9e8;border-radius:20px;background:#101b36;color:white;box-shadow:0 15px 40px #101b3620}.offer-clock h2{font-size:24px;color:#fff;margin:0 0 8px}.offer-digits{direction:ltr;display:flex;justify-content:center;gap:10px;margin:16px 0}.offer-digits span{display:grid;min-width:72px;padding:10px;background:#23375e;border-radius:12px}.offer-digits b{font:800 36px/1.3 Tahoma,sans-serif;color:#65d9e8}.offer-digits small{font-size:12px}.offer-clock p{margin:6px 0;font-size:14px}.offer-clock time{unicode-bidi:plaintext}</style></head>
 <body>
 
     <!-- Meta Pixel fallback -->
@@ -2528,7 +2528,7 @@ body {
       </div>
     </header>
 
-    <main>
+    <main><section class="offer-clock" aria-label="مدة العرض"><h2>عرض خاص لمدة 48 ساعة</h2><p>499 درهماً بدلاً من <del>799 درهماً</del> — خمس مواد للسنة كاملة</p><div class="offer-digits" role="timer" aria-label="الوقت المتبقي"><span><b data-hours>48</b><small>ساعة</small></span><span><b data-minutes>00</b><small>دقيقة</small></span><span><b data-seconds>00</b><small>ثانية</small></span></div><p data-offer-status>ينتهي العرض في <time data-offer-date></time> بتوقيت المغرب</p></section>
 
       <!-- Hero -->
       <section class="hero" id="home">
@@ -2570,14 +2570,14 @@ body {
             </div>
           </div>
 
-          <div class="price-card" aria-label="عرض الباك بخمس مواد مقابل 799 درهم">
+          <div class="price-card" aria-label="عرض الباك بخمس مواد مقابل 499 درهم">
             <div class="price-top">
               <span>OFFRE BAC / 2027</span>
               <span class="limited">عرض مميز</span>
             </div>
 
             <div class="price-label">استثمر في استعدادك للباكالوريا</div>
-            <div class="price">799 <small>DH</small></div>
+            <del class="old-price">799 DH</del><div class="price">499 <small>DH</small></div>
             <div class="price-desc">كتخلصها مرة وحدة فالسنة الدراسية كاملة</div>
 
             <hr class="price-divider">
@@ -2788,7 +2788,7 @@ body {
 
             
 <div class="registration-price">
-    <strong>799</strong>
+    <del class="old-price">799 DH</del><strong>499</strong>
     <span>DH</span>
     <small class="price-note">/ السنة كاملة</small>
 </div>
@@ -3383,7 +3383,7 @@ if (!allowedBranches.includes(branch)) {
           "رقم الهاتف: " + phone + "\n" +
           "الشعبة: " + branch + "\n" +
           "المستوى الدراسي: " + level + "\n" +
-          "العرض: خمس مواد - 799 DH\n\n" +
+          "العرض: خمس مواد - 499 DH\n\n" +
           "شكراً لكم.";
 
         // Save the registration in Supabase before redirecting.
@@ -3394,7 +3394,7 @@ if (!allowedBranches.includes(branch)) {
           branch: branch,
           level: level,
           offer: "OFFRE BAC - خمس مواد",
-          price: 799
+          price: 499
         };
 
         const submitButton = registrationForm.querySelector(
@@ -3432,7 +3432,7 @@ if (!allowedBranches.includes(branch)) {
         // Track a successfully saved registration.
         if (typeof window.fbq === "function") {
           window.fbq("track", "Purchase", {
-            value: 799,
+            value: 499,
             currency: "MAD"
           });
         }
@@ -3565,5 +3565,5 @@ if (!allowedBranches.includes(branch)) {
       }
     </style>
 
-</body>
+<script>(()=>{const end=Date.parse("2026-11-06T14:59:02.086449+00:00");const date=document.querySelector('[data-offer-date]');date.textContent=new Intl.DateTimeFormat('ar-MA',{dateStyle:'medium',timeStyle:'short',timeZone:'Africa/Casablanca'}).format(end);function tick(){const n=Math.max(0,Math.ceil((end-Date.now())/1000));for(const [key,value] of Object.entries({hours:Math.floor(n/3600),minutes:Math.floor(n/60)%60,seconds:n%60}))document.querySelector('[data-'+key+']').textContent=String(value).padStart(2,'0');if(!n){document.querySelector('[data-offer-status]').textContent='انتهى العرض الخاص';document.querySelectorAll('#registrationForm button[type="submit"],#registrationForm input[type="submit"]').forEach(b=>{b.disabled=true;b.textContent='انتهى العرض';});}}document.getElementById('registrationForm')?.addEventListener('submit',e=>{if(Date.now()>=end){e.preventDefault();e.stopImmediatePropagation();tick();}},true);tick();setInterval(tick,1000);})();</script></body>
 </html>
