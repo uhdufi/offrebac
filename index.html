@@ -2479,20 +2479,6 @@ body {
 }
 
 </style>
-    <!-- Supabase client: public publishable key (safe for browser use with RLS) -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script>
-      let supabaseClient = null;
-      if (window.supabase && typeof window.supabase.createClient === "function") {
-        supabaseClient = window.supabase.createClient(
-          "https://yzectimipxgekzlkjkoo.supabase.co",
-          "sb_publishable_V5nUCWgydWDKr2mAHmHG2A_dZIYFYIF"
-        );
-      } else {
-        console.error("Supabase SDK did not load. Check the network or CDN.");
-      }
-    </script>
-
 <style>.old-price{display:inline-block;color:#9caac0;font-size:23px;text-decoration-thickness:2px;margin:0 8px}.offer-clock{margin:24px auto;padding:24px 18px;max-width:680px;text-align:center;border:2px solid #65d9e8;border-radius:20px;background:#101b36;color:white;box-shadow:0 15px 40px #101b3620}.offer-clock h2{font-size:24px;color:#fff;margin:0 0 8px}.offer-digits{direction:ltr;display:flex;justify-content:center;gap:10px;margin:16px 0}.offer-digits span{display:grid;min-width:72px;padding:10px;background:#23375e;border-radius:12px}.offer-digits b{font:800 36px/1.3 Tahoma,sans-serif;color:#65d9e8}.offer-digits small{font-size:12px}.offer-clock p{margin:6px 0;font-size:14px}.offer-clock time{unicode-bidi:plaintext}</style></head>
 <body>
 
@@ -3386,50 +3372,11 @@ if (!allowedBranches.includes(branch)) {
           "العرض: خمس مواد - 499 DH\n\n" +
           "شكراً لكم.";
 
-        // Save the registration in Supabase before redirecting.
-        // Phone is stored as text to preserve the complete international number.
-        const registration = {
-          full_name: fullName,
-          phone: normalizedPhone,
-          branch: branch,
-          level: level,
-          offer: "OFFRE BAC - خمس مواد",
-          price: 499
-        };
-
-        const submitButton = registrationForm.querySelector(
-          'button[type="submit"]'
-        );
-        const originalButtonHTML = submitButton.innerHTML;
+        const submitButton = registrationForm.querySelector('button[type="submit"]');
         submitButton.disabled = true;
-        submitButton.textContent = "جارٍ حفظ التسجيل...";
+        submitButton.textContent = "جارٍ تحويلك...";
 
-        if (!supabaseClient) {
-          showFormError("تعذر الاتصال بخدمة التسجيل. تحقق من اتصال الإنترنت ثم أعد المحاولة.");
-          submitButton.disabled = false;
-          submitButton.innerHTML = originalButtonHTML;
-          return;
-        }
-
-        let saveError = null;
-        try {
-          const { error } = await supabaseClient
-            .from("offre_bac_registrations")
-            .insert([registration]);
-          saveError = error;
-        } catch (networkError) {
-          saveError = networkError;
-        }
-
-        if (saveError) {
-          console.error("Supabase registration error:", saveError);
-          showFormError("تعذر حفظ التسجيل حالياً. تحقق من الاتصال ثم أعد المحاولة.");
-          submitButton.disabled = false;
-          submitButton.innerHTML = originalButtonHTML;
-          return;
-        }
-
-        // Track a successfully saved registration.
+        // Track the submitted registration.
         if (typeof window.fbq === "function") {
           window.fbq("track", "Purchase", {
             value: 499,
