@@ -3512,5 +3512,37 @@ if (!allowedBranches.includes(branch)) {
       }
     </style>
 
-<script>(()=>{const end=Date.parse("2026-11-06T14:59:02.086449+00:00");const date=document.querySelector('[data-offer-date]');date.textContent=new Intl.DateTimeFormat('ar-MA',{dateStyle:'medium',timeStyle:'short',timeZone:'Africa/Casablanca'}).format(end);function tick(){const n=Math.max(0,Math.ceil((end-Date.now())/1000));for(const [key,value] of Object.entries({hours:Math.floor(n/3600),minutes:Math.floor(n/60)%60,seconds:n%60}))document.querySelector('[data-'+key+']').textContent=String(value).padStart(2,'0');if(!n){document.querySelector('[data-offer-status]').textContent='انتهى العرض الخاص';document.querySelectorAll('#registrationForm button[type="submit"],#registrationForm input[type="submit"]').forEach(b=>{b.disabled=true;b.textContent='انتهى العرض';});}}document.getElementById('registrationForm')?.addEventListener('submit',e=>{if(Date.now()>=end){e.preventDefault();e.stopImmediatePropagation();tick();}},true);tick();setInterval(tick,1000);})();</script></body>
+<script>
+(() => {
+  const duration = 48 * 60 * 60 * 1000;
+  const anchor = Date.parse('2026-11-06T14:59:02.086449+00:00');
+  const date = document.querySelector('[data-offer-date]');
+  const formatter = new Intl.DateTimeFormat('ar-MA', {
+    dateStyle: 'medium', timeStyle: 'short', timeZone: 'Africa/Casablanca'
+  });
+  let previousEnd;
+  function tick() {
+    const now = Date.now();
+    // Advance directly to the current 48-hour cycle, including after a closed tab.
+    const end = anchor + (Math.floor((now - anchor) / duration) + 1) * duration;
+    const remaining = Math.ceil((end - now) / 1000);
+    if (date && end !== previousEnd) {
+      date.textContent = formatter.format(end);
+      date.dateTime = new Date(end).toISOString();
+      previousEnd = end;
+    }
+    const values = {
+      hours: Math.floor(remaining / 3600),
+      minutes: Math.floor(remaining / 60) % 60,
+      seconds: remaining % 60
+    };
+    for (const [key, value] of Object.entries(values)) {
+      const element = document.querySelector('[data-' + key + ']');
+      if (element) element.textContent = String(value).padStart(2, '0');
+    }
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+</script></body>
 </html>
