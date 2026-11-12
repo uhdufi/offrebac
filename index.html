@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#101b36">
 
     <title>OFFRE BAC | الباك مضمون</title>
-    <meta name="description" content="OFFRE BAC - دروس تفاعلية لطلاب الثانية باكالوريا، برنامج أسبوعي متوازن وتسجيل سهل عبر واتساب.">
+    <meta name="description" content="OFFRE BAC - دروس تفاعلية لطلاب الثانية باكالوريا، برنامج أسبوعي متوازن وتسجيل سهل عبر الاستمارة.">
 
     <!-- Meta Pixel Code -->
     <script>
@@ -2769,7 +2769,7 @@ body {
 
             <p>
               املأ استمارة التسجيل بمعلوماتك الصحيحة،
-              ثم اضغط على زر تأكيد الطلب لإرسال رسالة التسجيل عبر واتساب.
+              ثم اضغط على زر تأكيد الطلب لإرسال معلوماتك وإتمام طلب التسجيل.
             </p>
 
             
@@ -2791,7 +2791,7 @@ body {
             <h3>استمارة التسجيل</h3>
 
             <p>
-              أدخل معلوماتك لإعداد رسالة التسجيل.
+              أدخل معلوماتك لإرسال طلب التسجيل.
             </p>
 
             <form id="registrationForm" novalidate>
@@ -2832,8 +2832,7 @@ body {
               <div class="form-message" id="formMessage" role="alert" aria-live="polite"></div>
 
               <p class="form-privacy">
-                سيُفتح واتساب لإرسال الرسالة. لن يتم إرسال البيانات تلقائياً
-                قبل تأكيد الإرسال من داخل واتساب.
+                سيتم حفظ معلوماتك عند تأكيد الطلب، ثم ستظهر صفحة تأكيد الاستلام.
               </p>
             </form>
           </div>
@@ -3299,18 +3298,20 @@ body {
       document.getElementById("currentYear").textContent =
         new Date().getFullYear();
 
-      // WhatsApp registration
+      // Supabase registration
       const registrationForm =
         document.getElementById("registrationForm");
 
       const formMessage =
         document.getElementById("formMessage");
 
-      // International format for Morocco: +212 663 271 459
-      const WHATSAPP_NUMBER = "212663271459";
+      const SUPABASE_URL = "https://cawmsiclnovszowsrsrq.supabase.co";
+      const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_oVZWHXlAdpM6tF32MzGP_Q_hX_VqzhN";
+      let submitting = false;
 
       registrationForm.addEventListener("submit", async function (event) {
         event.preventDefault();
+        if (submitting) return;
 
         formMessage.style.display = "none";
         formMessage.textContent = "";
@@ -3363,35 +3364,33 @@ if (!allowedBranches.includes(branch)) {
           return;
         }
 
-        const message =
-          "السلام عليكم، أريد التسجيل في عرض OFFRE BAC.\n\n" +
-          "الاسم الكامل: " + fullName + "\n" +
-          "رقم الهاتف: " + phone + "\n" +
-          "الشعبة: " + branch + "\n" +
-          "المستوى الدراسي: " + level + "\n" +
-          "العرض: خمس مواد - 499 DH\n\n" +
-          "شكراً لكم.";
-
         const submitButton = registrationForm.querySelector('button[type="submit"]');
+        const originalLabel = submitButton.innerHTML;
+        submitting = true;
         submitButton.disabled = true;
-        submitButton.textContent = "جارٍ تحويلك...";
-
-        // Track the submitted registration.
-        if (typeof window.fbq === "function") {
-          window.fbq("track", "Purchase", {
-            value: 499,
-            currency: "MAD"
+        submitButton.textContent = "جارٍ إرسال طلبك...";
+        try {
+          const response = await fetch(SUPABASE_URL + "/rest/v1/offre_bac_registrations", {
+            method: "POST",
+            headers: {
+              "apikey": SUPABASE_PUBLISHABLE_KEY,
+              "Content-Type": "application/json",
+              "Prefer": "return=minimal"
+            },
+            body: JSON.stringify({full_name: fullName, phone: normalizedPhone, branch, level})
           });
+          if (!response.ok) throw new Error("Registration failed: " + response.status);
+          try { sessionStorage.setItem("offre_bac_submitted", "1"); } catch (_) {}
+          if (typeof window.fbq === "function") {
+            try { window.fbq("track", "Purchase", {value: 499, currency: "MAD"}); } catch (_) {}
+          }
+          window.location.assign(new URL("tankupage.html", window.location.href).toString());
+        } catch (error) {
+          showFormError("تعذّر إرسال طلبك. تحقق من اتصال الإنترنت وحاول مجدداً. إذا استمرت المشكلة، تواصل مع إدارة الموقع.");
+          submitting = false;
+          submitButton.disabled = false;
+          submitButton.innerHTML = originalLabel;
         }
-
-        // Keep the existing thank-you page and WhatsApp flow unchanged.
-        const thankYouURL = new URL("tankupage.html", window.location.href);
-        thankYouURL.searchParams.set("fullName", fullName);
-        thankYouURL.searchParams.set("phone", phone);
-        thankYouURL.searchParams.set("branch", branch);
-        thankYouURL.searchParams.set("level", level);
-
-        window.location.assign(thankYouURL.toString());
       });
 
       function normalizePhoneNumber(value) {
